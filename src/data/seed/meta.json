@@ -1,0 +1,19 @@
+{
+  "generatedAt": "2026-10-11T11:22:21.397Z",
+  "range": {
+    "from": "2026-01-01",
+    "to": "2030-12-31"
+  },
+  "reckoning": "New Delhi sunrise (matches Drik Panchang)",
+  "cabellaYearsPublished": [
+    2026
+  ],
+  "counts": {
+    "pujas": 11,
+    "localPujas": 10,
+    "festivals": 187,
+    "moonDays": 363,
+    "eclipses": 14,
+    "links": 7
+  }
+}

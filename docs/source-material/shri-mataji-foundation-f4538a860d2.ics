@@ -1,0 +1,49 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Shri Mataji Foundation - ECPv6.16.3//NONSGML v1.0//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Shri Mataji Foundation
+X-ORIGINAL-URL:https://shrimatajifoundation.org
+X-WR-CALDESC:Events for Shri Mataji Foundation
+REFRESH-INTERVAL;VALUE=DURATION:PT1H
+X-Robots-Tag:noindex
+X-PUBLISHED-TTL:PT1H
+BEGIN:VTIMEZONE
+TZID:UTC
+BEGIN:STANDARD
+TZOFFSETFROM:+0000
+TZOFFSETTO:+0000
+TZNAME:UTC
+DTSTART:20250101T000000
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260904
+DTEND;VALUE=DATE:20260907
+DTSTAMP:20260904T120433
+CREATED:20240315T150926Z
+LAST-MODIFIED:20251102T212537Z
+UID:6328-1788480000-1788739199@shrimatajifoundation.org
+SUMMARY:Shri Krishna Puja
+DESCRIPTION:🗓️ Date: Sunday 6th September\n🌍 Hosting Countries: North\, Central & South America\, Albania\, Croatia\, Macedonia\, Poland\, Romania & Serbia
+URL:https://shrimatajifoundation.org/event/krishna-puja/
+LOCATION:Cabella (Albera Camp)\, Strada Provinciale 140\, 2\, Cabella Ligure\, Italy
+CATEGORIES:Puja Calendar
+ATTACH;FMTTYPE=image/jpeg:https://shrimatajifoundation.org/wp-content/uploads/2024/03/Krishna_Puja.jpg
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260911
+DTEND;VALUE=DATE:20260914
+DTSTAMP:20260904T120433
+CREATED:20240315T151046Z
+LAST-MODIFIED:20251102T212619Z
+UID:6331-1789084800-1789343999@shrimatajifoundation.org
+SUMMARY:Shri Ganesha Puja
+DESCRIPTION:🗓️ Date: Saturday 12th September\n🌍 Hosting Countries: Italy\, Andorra\, Australia\, China\, Hong Kong\, India\, Indonesia\, Japan\, Malaysia\, New Zealand\, Philippines\, Russia\, Singapore\, Spain\, Taiwan\, Thailand & Vietnam
+URL:https://shrimatajifoundation.org/event/ganesha-puja/
+LOCATION:Cabella (Albera Camp)\, Strada Provinciale 140\, 2\, Cabella Ligure\, Italy
+CATEGORIES:Puja Calendar
+ATTACH;FMTTYPE=image/jpeg:https://shrimatajifoundation.org/wp-content/uploads/2024/03/Ganesha_Puja.jpg
+END:VEVENT
+END:VCALENDAR

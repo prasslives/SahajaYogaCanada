@@ -1,0 +1,24 @@
+{
+  "//": "Seed and diagnostic scripts run under Node, not React Native, so they get their own environment. Only the platform-agnostic src folders are included; UI code is checked by tsconfig.json.",
+  "compilerOptions": {
+    "strict": true,
+    "target": "ES2023",
+    "lib": [
+      "ES2023"
+    ],
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "types": [
+      "node"
+    ],
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "include": [
+    "scripts",
+    "src/lib",
+    "src/domain"
+  ]
+}

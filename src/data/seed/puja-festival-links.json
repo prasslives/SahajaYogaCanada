@@ -1,0 +1,65 @@
+[
+  {
+    "pujaUid": "5805-1770940800-1771199999@shrimatajifoundation.org",
+    "pujaTitle": "Mahashivaratri Puja",
+    "pujaDate": "2026-02-15",
+    "festivalKey": "mahashivaratri",
+    "festivalName": "Mahashivaratri",
+    "festivalDate": "2026-02-15",
+    "dayGap": 0
+  },
+  {
+    "pujaUid": "6314-1775174400-1775433599@shrimatajifoundation.org",
+    "pujaTitle": "Easter Puja",
+    "pujaDate": "2026-04-05",
+    "festivalKey": "easter",
+    "festivalName": "Easter Sunday",
+    "festivalDate": "2026-04-05",
+    "dayGap": 0
+  },
+  {
+    "pujaUid": "6325-1785542400-1785801599@shrimatajifoundation.org",
+    "pujaTitle": "Shri Adi Guru Puja",
+    "pujaDate": "2026-08-02",
+    "festivalKey": "guru-purnima",
+    "festivalName": "Guru Purnima",
+    "festivalDate": "2026-07-29",
+    "dayGap": 4
+  },
+  {
+    "pujaUid": "6328-1788480000-1788739199@shrimatajifoundation.org",
+    "pujaTitle": "Shri Krishna Puja",
+    "pujaDate": "2026-09-06",
+    "festivalKey": "janmashtami",
+    "festivalName": "Shri Krishna Janmashtami",
+    "festivalDate": "2026-09-04",
+    "dayGap": 2
+  },
+  {
+    "pujaUid": "6331-1789084800-1789343999@shrimatajifoundation.org",
+    "pujaTitle": "Shri Ganesha Puja",
+    "pujaDate": "2026-09-12",
+    "festivalKey": "ganesh-chaturthi",
+    "festivalName": "Shri Ganesha Chaturthi",
+    "festivalDate": "2026-09-14",
+    "dayGap": -2
+  },
+  {
+    "pujaUid": "6334-1792108800-1792367999@shrimatajifoundation.org",
+    "pujaTitle": "Navaratri",
+    "pujaDate": "2026-10-18",
+    "festivalKey": "navaratri",
+    "festivalName": "Navaratri",
+    "festivalDate": "2026-10-11",
+    "dayGap": 7
+  },
+  {
+    "pujaUid": "6337-1793923200-1794182399@shrimatajifoundation.org",
+    "pujaTitle": "Diwali",
+    "pujaDate": "2026-11-08",
+    "festivalKey": "diwali",
+    "festivalName": "Diwali / Lakshmi Puja",
+    "festivalDate": "2026-11-08",
+    "dayGap": 0
+  }
+]

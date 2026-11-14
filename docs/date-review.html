@@ -1,0 +1,1316 @@
+<title>Panchang Seed Review</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --paper: #F7F8F5; --card: #FFFFFF; --ink: #16201B; --ink-soft: #55625B;
+    --rule: #DDE3DC; --rule-soft: #EBEFE9;
+    --green: #1E5B45; --green-soft: #E6EFE9; --brass: #8A6522; --brass-soft: #F5EEDD;
+    --flag: #A8481A; --flag-soft: #FAEBE2;
+    --shadow: 0 1px 2px rgba(22,32,27,.05), 0 8px 24px -16px rgba(22,32,27,.25);
+  }
+  :root:not([data-theme="light"]) { }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #101412; --card: #171D19; --ink: #E8EDE7; --ink-soft: #93A198;
+      --rule: #28312B; --rule-soft: #1F2622;
+      --green: #74C3A0; --green-soft: #17251E; --brass: #D3A85A; --brass-soft: #221C0F;
+      --flag: #E39066; --flag-soft: #291710;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #101412; --card: #171D19; --ink: #E8EDE7; --ink-soft: #93A198;
+    --rule: #28312B; --rule-soft: #1F2622;
+    --green: #74C3A0; --green-soft: #17251E; --brass: #D3A85A; --brass-soft: #221C0F;
+    --flag: #E39066; --flag-soft: #291710;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+    font-size: 15px; line-height: 1.6; margin: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 56px 24px 96px; }
+
+  h1, h2, h3 { font-family: Spectral, Georgia, serif; text-wrap: balance; margin: 0; font-weight: 600; }
+  h1 { font-size: clamp(30px, 5vw, 44px); line-height: 1.1; letter-spacing: -.01em; }
+  h2 { font-size: 24px; letter-spacing: -.005em; }
+  h3 { font-size: 17px; }
+  p { margin: 0; max-width: 68ch; }
+
+  .eyebrow {
+    font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--green); font-family: "IBM Plex Sans", sans-serif;
+  }
+
+  header { display: flex; flex-direction: column; gap: 14px; padding-bottom: 32px; }
+  header .lede { color: var(--ink-soft); font-size: 17px; }
+  .meta-line {
+    display: flex; flex-wrap: wrap; gap: 8px 20px; padding-top: 8px;
+    font-family: "IBM Plex Mono", monospace; font-size: 12.5px; color: var(--ink-soft);
+  }
+  .meta-line b { color: var(--ink); font-weight: 500; }
+
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 28px 0 8px; }
+  .tile { background: var(--card); border: 1px solid var(--rule); border-radius: 10px; padding: 16px 18px; box-shadow: var(--shadow); }
+  .tile .n { font-family: "IBM Plex Mono", monospace; font-size: 28px; font-weight: 500; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .tile .k { font-size: 12px; color: var(--ink-soft); margin-top: 4px; }
+  .tile.accent .n { color: var(--green); }
+  .tile.warn .n { color: var(--flag); }
+
+  section { margin-top: 56px; display: flex; flex-direction: column; gap: 16px; }
+  .section-head { display: flex; flex-direction: column; gap: 6px; border-top: 2px solid var(--ink); padding-top: 14px; }
+
+  .callout {
+    background: var(--brass-soft); border: 1px solid var(--brass); border-radius: 10px;
+    padding: 16px 18px; display: flex; flex-direction: column; gap: 8px;
+  }
+  .callout.flag { background: var(--flag-soft); border-color: var(--flag); }
+  .callout h3 { color: var(--brass); font-size: 15px; }
+  .callout.flag h3 { color: var(--flag); }
+  .callout p { font-size: 14px; }
+
+  .scroll { overflow-x: auto; border: 1px solid var(--rule); border-radius: 10px; background: var(--card); box-shadow: var(--shadow); }
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+  th {
+    text-align: left; font-size: 11px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--ink-soft); padding: 11px 14px; border-bottom: 1px solid var(--rule); white-space: nowrap;
+    background: var(--card); position: sticky; top: 0;
+  }
+  td { padding: 9px 14px; border-bottom: 1px solid var(--rule-soft); vertical-align: top; }
+  tr:last-child td { border-bottom: 0; }
+  .num { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .strong { font-weight: 500; color: var(--green); }
+  .dim { color: var(--ink-soft); }
+  .note { color: var(--ink-soft); font-size: 12.5px; min-width: 200px; }
+  .sub { color: var(--ink-soft); font-size: 12px; }
+  .gap { font-family: "IBM Plex Mono", monospace; color: var(--brass); font-weight: 500; }
+
+  .tag {
+    display: inline-block; font-size: 10.5px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
+    padding: 2px 7px; border-radius: 4px; white-space: nowrap;
+  }
+  .tag-verified { background: var(--green-soft); color: var(--green); }
+  .tag-computed { background: var(--rule-soft); color: var(--ink-soft); }
+  .tag-check { background: var(--flag-soft); color: var(--flag); }
+  .tag-solar { background: var(--brass-soft); color: var(--brass); }
+  .tag-lunar { background: var(--green-soft); color: var(--green); }
+  .tag-moon-purnima { background: var(--brass-soft); color: var(--brass); }
+  .tag-moon-amavasya { background: var(--rule-soft); color: var(--ink-soft); }
+  .tag-moon-saptami, .tag-moon-navami { background: var(--green-soft); color: var(--green); }
+
+  .controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .chip {
+    font: inherit; font-size: 12.5px; padding: 5px 12px; border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--rule); background: var(--card); color: var(--ink-soft);
+  }
+  .chip:hover { border-color: var(--green); color: var(--green); }
+  .chip[aria-pressed="true"] { background: var(--green); border-color: var(--green); color: var(--paper); }
+  .chip:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+
+  ol.todo { margin: 0; padding-left: 0; list-style: none; counter-reset: t; display: flex; flex-direction: column; gap: 12px; }
+  ol.todo li { counter-increment: t; display: grid; grid-template-columns: 26px 1fr; gap: 12px; align-items: start; }
+  ol.todo li::before {
+    content: counter(t); font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 500;
+    width: 24px; height: 24px; border-radius: 6px; display: grid; place-items: center;
+    background: var(--green-soft); color: var(--green);
+  }
+  ol.todo b { font-weight: 600; }
+  ol.todo p { font-size: 14px; color: var(--ink-soft); }
+
+  details { border: 1px solid var(--rule); border-radius: 10px; background: var(--card); }
+  summary { padding: 12px 16px; cursor: pointer; font-size: 13.5px; font-weight: 500; }
+  summary:focus-visible { outline: 2px solid var(--green); outline-offset: -2px; }
+  details .scroll { border: 0; border-top: 1px solid var(--rule); border-radius: 0; box-shadow: none; }
+
+  footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: 13px; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Sahaja Yoga Canada &middot; Calendar App</div>
+    <h1>Five-year date review</h1>
+    <p class="lede">Every festival, moon day, eclipse and puja the app will show, computed from scratch and cross-checked. Please confirm the dates flagged for review &mdash; everything here is editable later.</p>
+    <div class="meta-line">
+      <span>Generated <b>11 October 2026</b></span>
+      <span>Range <b>2026&ndash;2030</b></span>
+      <span>Reckoned by <b>New Delhi sunrise</b></span>
+      <span>Authority <b>Drik Panchang</b></span>
+    </div>
+  </header>
+
+  <div class="tiles">
+    <div class="tile accent"><div class="n">21/21</div><div class="k">2026 festival dates matching Drik</div></div>
+    <div class="tile"><div class="n">187</div><div class="k">Festival occurrences</div></div>
+    <div class="tile"><div class="n">363</div><div class="k">Moon days</div></div>
+    <div class="tile"><div class="n">14</div><div class="k">Eclipses visible in Canada</div></div>
+    <div class="tile"><div class="n">11<span style="font-size:16px;color:var(--ink-soft)"> + 2</span></div><div class="k">Pujas in 2026 &mdash; Cabella + Canada</div></div>
+    <div class="tile warn"><div class="n">15</div><div class="k">Need your confirmation</div></div>
+  </div>
+
+  <section>
+    <div class="section-head"><div class="eyebrow">Start here</div><h2>What I need you to check</h2></div>
+    <div class="callout"><h3>Settled since the last version</h3><p>Christmas Puja is now placed on Christmas Day itself. Birthday, Sahasrara and Shri Adi Shakti Puja are treated as fixed Sahaja dates with no separate festival. The Islamic list is trimmed to Prophet Muhammad's Birthday, Ramzan and Bakrid.</p></div>
+    <ol class="todo">
+      <li><div><b>The 15 Islamic dates.</b><p>Now trimmed to the three the collective observes &mdash; Prophet Muhammad's Birthday, Eid al-Fitr (Ramzan) and Eid al-Adha (Bakrid). All three come from the tabular Hijri calendar, so actual observance follows local moon sighting and can shift by a day. If the collective follows a particular mosque or council, tell me and I will match it.</p></div></li>
+      <li><div><b>Sankranti Puja on 14 January.</b><p>Placed on Makar Sankranti itself, since you described the puja year as running from Sankranti to Christmas Puja. Confirm this is the day the collective observes it, or give me the right one.</p></div></li>
+      <li><div><b>Shri Mahakali Puja, 29 November 2026.</b><p>You said this is a one-off rather than an annual fixture. It is still in Cabella's own 2026 calendar and has not happened yet, so I have left it on this year's calendar &mdash; it will not carry into later years, because pujas are read from the feed each year rather than from a fixed list. Say the word if you would rather it were hidden entirely.</p></div></li>
+      <li><div><b>Any festival the collective observes that is missing.</b><p>The list covers Hindu, Christian, Buddhist, Sikh and Islamic observances. Tell me anything to add or remove.</p></div></li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="section-head"><div class="eyebrow">Cabella</div><h2>Puja calendar, and the years that are missing</h2></div>
+    <div class="callout flag">
+      <h3>Only 2026 is published</h3>
+      <p>The Shri Mataji Foundation feed returns pujas for 2026 only; 2027 onward are not out yet. The app syncs monthly and will pick each year up automatically as it is published, so the calendar will show festivals and moon days for all five years but pujas only as far ahead as Cabella has announced them.</p>
+    </div>
+    <div class="scroll"><table>
+      <thead><tr><th>Puja date</th><th></th><th>Puja</th><th>Source</th><th>Gathering</th><th>Celebrates / note</th></tr></thead>
+      <tbody><tr><td class="num">2026-01-14</td><td class="dim">Wed</td>
+    <td>Sankranti Puja <span class="tag tag-check">confirm</span></td>
+    <td><span class="tag tag-verified">Canada</span></td>
+    <td class="dim num"><span class="dim">single day</span></td>
+    <td class="note">Opens the puja year. Placed on Makar Sankranti itself.</td></tr>
+<tr><td class="num">2026-02-15</td><td class="dim">Sun</td>
+    <td>Mahashivaratri Puja</td>
+    <td><span class="tag tag-computed">Cabella</span></td>
+    <td class="dim num">Feb 13 &ndash; Feb 15</td>
+    <td class="note">Mahashivaratri <span class="gap">+0d</span></td></tr>
+<tr><td class="num">2026-03-21</td><td class="dim">Sat</td>
+    <td>Birthday Puja</td>
+    <td><span class="tag tag-computed">Cabella</span></td>
+    <td class="dim num">Mar 20 &ndash; Mar 22</td>
+    <td class="note"><span class="dim">&mdash;</span></td></tr>
+<tr><td class="num">2026-04-05</td><td class="dim">Sun</td>
+    <td>Easter Puja</td>
+    <td><span class="tag tag-computed">Cabella</span></td>
+    <td class="dim num">Apr 3 &ndash; Apr 5</td>
+    <td class="note">Easter Sunday <span class="gap">+0d</span></td></tr>
+<tr><td class="num">2026-05-03</td><td class="dim">Sun</td>
+    <td>Sahasrara Puja</td>
+    <td><span class="tag tag-computed">Cabella</span></td>
+    <td class="dim num">May 1 &ndash; May 3</td>
+    <td class="note"><span class="dim">&mdash;</span></td></tr>
+<tr><td class="num">2026-06-28</td><td class="dim">Sun</td>
+    <td>Shri Adi Shakti Puja</td>
+    <td><span class="tag tag-computed">Cabella</span></td>
+    <td class="dim num">Jun 26 &ndash; Jun 28</td>
+    <td class="note"><span class="dim">&mdash;</span></td></tr>
+<tr><td class="num">2026-08-02</td><td class="dim">Sun</td>
+    <td>Shri Adi Guru Puja</td>
+    <td><span class="tag tag-computed">Cabella</span></td>
+    <td class="dim num">Aug 1 &ndash; Aug 3</td>
+    <td class="note">Guru Purnima <span class="gap">+4d</span></td></tr>
+<tr><td class="num">2026-09-06</td><td class="dim">Sun</td>
+    <td>Shri Krishna Puja</td>
+    <td><span class="tag tag-computed">Cabella</span></td>
+    <td class="dim num">Sep 4 &ndash; Sep 6</td>
+    <td class="note">Shri Krishna Janmashtami <span class="gap">+2d</span></td></tr>
+<tr><td class="num">2026-09-12</td><td class="dim">Sat</td>
+    <td>Shri Ganesha Puja</td>
+    <td><span class="tag tag-computed">Cabella</span></td>
+    <td class="dim num">Sep 11 &ndash; Sep 13</td>
+    <td class="note">Shri Ganesha Chaturthi <span class="gap">-2d</span></td></tr>
+<tr><td class="num">2026-10-18</td><td class="dim">Sun</td>
+    <td>Navaratri</td>
+    <td><span class="tag tag-computed">Cabella</span></td>
+    <td class="dim num">Oct 16 &ndash; Oct 18</td>
+    <td class="note">Navaratri <span class="gap">+7d</span></td></tr>
+<tr><td class="num">2026-11-08</td><td class="dim">Sun</td>
+    <td>Diwali</td>
+    <td><span class="tag tag-computed">Cabella</span></td>
+    <td class="dim num">Nov 6 &ndash; Nov 8</td>
+    <td class="note">Diwali / Lakshmi Puja <span class="gap">+0d</span></td></tr>
+<tr><td class="num">2026-11-29</td><td class="dim">Sun</td>
+    <td>Shri Mahakali Puja</td>
+    <td><span class="tag tag-computed">Cabella</span></td>
+    <td class="dim num">Nov 27 &ndash; Nov 29</td>
+    <td class="note"><span class="dim">&mdash;</span></td></tr>
+<tr><td class="num">2026-12-25</td><td class="dim">Fri</td>
+    <td>Christmas Puja</td>
+    <td><span class="tag tag-verified">Canada</span></td>
+    <td class="dim num"><span class="dim">single day</span></td>
+    <td class="note">Closes the puja year, celebrated on Christmas Day.</td></tr></tbody>
+    </table></div>
+    <p class="note">Rows marked <span class="tag tag-computed">Cabella</span> come from the foundation's feed, which gives a three-day weekend for each puja with the exact day written in the event description. Rows marked <span class="tag tag-verified">Canada</span> are observed locally and are not in the feed at all. Note Shri Ganesha Puja falls <b>before</b> Ganesha Chaturthi, and Shri Krishna Puja two days <b>after</b> Janmashtami &mdash; which is why the app shows both dates separately.</p>
+  </section>
+
+  <section>
+    <div class="section-head"><div class="eyebrow">Festivals</div><h2>Religious festivals, 2026&ndash;2030</h2></div>
+    <p class="note">2026 was checked line by line against Drik Panchang and matches on all 21 comparable dates. Later years use the identical rules but have not been compared against a published almanac.</p>
+    <div class="controls">
+      <button class="chip" data-filter="year" data-value="all" aria-pressed="true">All years</button>
+      <button class="chip" data-filter="year" data-value="2026" aria-pressed="false">2026</button>
+      <button class="chip" data-filter="year" data-value="2027" aria-pressed="false">2027</button>
+      <button class="chip" data-filter="year" data-value="2028" aria-pressed="false">2028</button>
+      <button class="chip" data-filter="year" data-value="2029" aria-pressed="false">2029</button>
+      <button class="chip" data-filter="year" data-value="2030" aria-pressed="false">2030</button>
+      <span style="flex:1"></span>
+      <button class="chip" id="flagged" aria-pressed="false">Only those needing confirmation</button>
+    </div>
+    <div class="scroll"><table id="festivals">
+      <thead><tr><th>Date</th><th></th><th>Festival</th><th>Tradition</th><th>Status</th><th>Note</th></tr></thead>
+      <tbody><tr data-year="2026" data-status="computed" data-name="makar sankranti">
+      <td class="num">2026-01-14</td><td class="dim">Wed</td>
+      <td>Makar Sankranti</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Sun enters Makara (Capricorn).</td></tr>
+<tr data-year="2026" data-status="computed" data-name="vasant panchami">
+      <td class="num">2026-01-23</td><td class="dim">Fri</td>
+      <td>Vasant Panchami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2026" data-status="verified" data-name="mahashivaratri">
+      <td class="num">2026-02-15</td><td class="dim">Sun</td>
+      <td>Mahashivaratri</td><td class="dim">hindu</td>
+      <td><span class="tag tag-verified">verified</span></td>
+      <td class="note">Observed through the nishita (midnight) period.</td></tr>
+<tr data-year="2026" data-status="verified" data-name="holika dahan">
+      <td class="num">2026-03-03</td><td class="dim">Tue</td>
+      <td>Holika Dahan</td><td class="dim">hindu</td>
+      <td><span class="tag tag-verified">verified</span></td>
+      <td class="note">Bonfire on the eve of Holi. Timing within the night is set by Bhadra, so treat the evening as approximate.</td></tr>
+<tr data-year="2026" data-status="verified" data-name="holi">
+      <td class="num">2026-03-04</td><td class="dim">Wed</td>
+      <td>Holi</td><td class="dim">hindu</td>
+      <td><span class="tag tag-verified">verified</span></td>
+      <td class="note">Celebrated in Sahaja Yoga though it is not a puja day.</td></tr>
+<tr data-year="2026" data-status="verified" data-name="ugadi / gudi padwa">
+      <td class="num">2026-03-19</td><td class="dim">Thu</td>
+      <td>Ugadi / Gudi Padwa</td><td class="dim">hindu</td>
+      <td><span class="tag tag-verified">verified</span></td>
+      <td class="note">Hindu new year.</td></tr>
+<tr data-year="2026" data-status="check" data-name="eid al-fitr (ramzan)">
+      <td class="num">2026-03-20</td><td class="dim">Fri</td>
+      <td>Eid al-Fitr (Ramzan)</td><td class="dim">islamic</td>
+      <td><span class="tag tag-check">confirm</span></td>
+      <td class="note">Tabular Hijri date; local moon sighting may shift it by a day.</td></tr>
+<tr data-year="2026" data-status="verified" data-name="shri rama navami">
+      <td class="num">2026-03-26</td><td class="dim">Thu</td>
+      <td>Shri Rama Navami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-verified">verified</span></td>
+      <td class="note">Shri Rama was born at madhyahna (midday).</td></tr>
+<tr data-year="2026" data-status="verified" data-name="hanuman jayanti">
+      <td class="num">2026-04-02</td><td class="dim">Thu</td>
+      <td>Hanuman Jayanti</td><td class="dim">hindu</td>
+      <td><span class="tag tag-verified">verified</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2026" data-status="verified" data-name="good friday">
+      <td class="num">2026-04-03</td><td class="dim">Fri</td>
+      <td>Good Friday</td><td class="dim">christian</td>
+      <td><span class="tag tag-verified">verified</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2026" data-status="verified" data-name="easter sunday">
+      <td class="num">2026-04-05</td><td class="dim">Sun</td>
+      <td>Easter Sunday</td><td class="dim">christian</td>
+      <td><span class="tag tag-verified">verified</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2026" data-status="computed" data-name="vaisakhi / mesha sankranti">
+      <td class="num">2026-04-14</td><td class="dim">Tue</td>
+      <td>Vaisakhi / Mesha Sankranti</td><td class="dim">sikh</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Sun enters Mesha (Aries).</td></tr>
+<tr data-year="2026" data-status="verified" data-name="akshaya tritiya">
+      <td class="num">2026-04-19</td><td class="dim">Sun</td>
+      <td>Akshaya Tritiya</td><td class="dim">hindu</td>
+      <td><span class="tag tag-verified">verified</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2026" data-status="verified" data-name="buddha purnima (vesak)">
+      <td class="num">2026-05-01</td><td class="dim">Fri</td>
+      <td>Buddha Purnima (Vesak)</td><td class="dim">buddhist</td>
+      <td><span class="tag tag-verified">verified</span></td>
+      <td class="note">Shri Buddha's birth, enlightenment and parinirvana.</td></tr>
+<tr data-year="2026" data-status="check" data-name="eid al-adha (bakrid)">
+      <td class="num">2026-05-27</td><td class="dim">Wed</td>
+      <td>Eid al-Adha (Bakrid)</td><td class="dim">islamic</td>
+      <td><span class="tag tag-check">confirm</span></td>
+      <td class="note">Tabular Hijri date; local moon sighting may shift it by a day.</td></tr>
+<tr data-year="2026" data-status="verified" data-name="guru purnima">
+      <td class="num">2026-07-29</td><td class="dim">Wed</td>
+      <td>Guru Purnima</td><td class="dim">hindu</td>
+      <td><span class="tag tag-verified">verified</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2026" data-status="check" data-name="mawlid an-nabi (prophet muhammad's birthday)">
+      <td class="num">2026-08-26</td><td class="dim">Wed</td>
+      <td>Mawlid an-Nabi (Prophet Muhammad's Birthday)</td><td class="dim">islamic</td>
+      <td><span class="tag tag-check">confirm</span></td>
+      <td class="note">Tabular Hijri date; local moon sighting may shift it by a day.</td></tr>
+<tr data-year="2026" data-status="verified" data-name="raksha bandhan">
+      <td class="num">2026-08-28</td><td class="dim">Fri</td>
+      <td>Raksha Bandhan</td><td class="dim">hindu</td>
+      <td><span class="tag tag-verified">verified</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2026" data-status="verified" data-name="shri krishna janmashtami">
+      <td class="num">2026-09-04</td><td class="dim">Fri</td>
+      <td>Shri Krishna Janmashtami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-verified">verified</span></td>
+      <td class="note">Shri Krishna was born at nishita (midnight).</td></tr>
+<tr data-year="2026" data-status="verified" data-name="shri ganesha chaturthi">
+      <td class="num">2026-09-14</td><td class="dim">Mon</td>
+      <td>Shri Ganesha Chaturthi</td><td class="dim">hindu</td>
+      <td><span class="tag tag-verified">verified</span></td>
+      <td class="note">Determined by the madhyahna (midday) period.</td></tr>
+<tr data-year="2026" data-status="verified" data-name="navaratri">
+      <td class="num">2026-10-11</td><td class="dim">Sun</td>
+      <td>Navaratri <span class="sub">9 days from here</span></td><td class="dim">hindu</td>
+      <td><span class="tag tag-verified">verified</span></td>
+      <td class="note">All nine nights of Shri Durga.</td></tr>
+<tr data-year="2026" data-status="verified" data-name="durga ashtami">
+      <td class="num">2026-10-19</td><td class="dim">Mon</td>
+      <td>Durga Ashtami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-verified">verified</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2026" data-status="verified" data-name="maha navami">
+      <td class="num">2026-10-19</td><td class="dim">Mon</td>
+      <td>Maha Navami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-verified">verified</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2026" data-status="verified" data-name="dussehra / vijayadashami">
+      <td class="num">2026-10-20</td><td class="dim">Tue</td>
+      <td>Dussehra / Vijayadashami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-verified">verified</span></td>
+      <td class="note">Observed in the aparahna (afternoon) period.</td></tr>
+<tr data-year="2026" data-status="verified" data-name="diwali / lakshmi puja">
+      <td class="num">2026-11-08</td><td class="dim">Sun</td>
+      <td>Diwali / Lakshmi Puja</td><td class="dim">hindu</td>
+      <td><span class="tag tag-verified">verified</span></td>
+      <td class="note">Lakshmi Puja falls in the pradosh (evening) period of Amavasya.</td></tr>
+<tr data-year="2026" data-status="verified" data-name="govardhan puja">
+      <td class="num">2026-11-10</td><td class="dim">Tue</td>
+      <td>Govardhan Puja</td><td class="dim">hindu</td>
+      <td><span class="tag tag-verified">verified</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2026" data-status="verified" data-name="bhai dooj">
+      <td class="num">2026-11-11</td><td class="dim">Wed</td>
+      <td>Bhai Dooj</td><td class="dim">hindu</td>
+      <td><span class="tag tag-verified">verified</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2026" data-status="computed" data-name="kartika purnima / guru nanak jayanti">
+      <td class="num">2026-11-24</td><td class="dim">Tue</td>
+      <td>Kartika Purnima / Guru Nanak Jayanti</td><td class="dim">sikh</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2026" data-status="computed" data-name="datta jayanti">
+      <td class="num">2026-12-23</td><td class="dim">Wed</td>
+      <td>Datta Jayanti</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2026" data-status="computed" data-name="christmas">
+      <td class="num">2026-12-25</td><td class="dim">Fri</td>
+      <td>Christmas</td><td class="dim">christian</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2027" data-status="computed" data-name="makar sankranti">
+      <td class="num">2027-01-15</td><td class="dim">Fri</td>
+      <td>Makar Sankranti</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Sun enters Makara (Capricorn).</td></tr>
+<tr data-year="2027" data-status="computed" data-name="vasant panchami">
+      <td class="num">2027-02-11</td><td class="dim">Thu</td>
+      <td>Vasant Panchami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2027" data-status="computed" data-name="mahashivaratri">
+      <td class="num">2027-03-06</td><td class="dim">Sat</td>
+      <td>Mahashivaratri</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Observed through the nishita (midnight) period.</td></tr>
+<tr data-year="2027" data-status="check" data-name="eid al-fitr (ramzan)">
+      <td class="num">2027-03-10</td><td class="dim">Wed</td>
+      <td>Eid al-Fitr (Ramzan)</td><td class="dim">islamic</td>
+      <td><span class="tag tag-check">confirm</span></td>
+      <td class="note">Tabular Hijri date; local moon sighting may shift it by a day.</td></tr>
+<tr data-year="2027" data-status="computed" data-name="holika dahan">
+      <td class="num">2027-03-22</td><td class="dim">Mon</td>
+      <td>Holika Dahan</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Bonfire on the eve of Holi. Timing within the night is set by Bhadra, so treat the evening as approximate.</td></tr>
+<tr data-year="2027" data-status="computed" data-name="holi">
+      <td class="num">2027-03-23</td><td class="dim">Tue</td>
+      <td>Holi</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Celebrated in Sahaja Yoga though it is not a puja day.</td></tr>
+<tr data-year="2027" data-status="computed" data-name="good friday">
+      <td class="num">2027-03-26</td><td class="dim">Fri</td>
+      <td>Good Friday</td><td class="dim">christian</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2027" data-status="computed" data-name="easter sunday">
+      <td class="num">2027-03-28</td><td class="dim">Sun</td>
+      <td>Easter Sunday</td><td class="dim">christian</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2027" data-status="computed" data-name="ugadi / gudi padwa">
+      <td class="num">2027-04-07</td><td class="dim">Wed</td>
+      <td>Ugadi / Gudi Padwa</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Hindu new year.</td></tr>
+<tr data-year="2027" data-status="computed" data-name="vaisakhi / mesha sankranti">
+      <td class="num">2027-04-14</td><td class="dim">Wed</td>
+      <td>Vaisakhi / Mesha Sankranti</td><td class="dim">sikh</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Sun enters Mesha (Aries).</td></tr>
+<tr data-year="2027" data-status="computed" data-name="shri rama navami">
+      <td class="num">2027-04-15</td><td class="dim">Thu</td>
+      <td>Shri Rama Navami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Shri Rama was born at madhyahna (midday).</td></tr>
+<tr data-year="2027" data-status="computed" data-name="hanuman jayanti">
+      <td class="num">2027-04-20</td><td class="dim">Tue</td>
+      <td>Hanuman Jayanti</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2027" data-status="computed" data-name="akshaya tritiya">
+      <td class="num">2027-05-08</td><td class="dim">Sat</td>
+      <td>Akshaya Tritiya</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2027" data-status="check" data-name="eid al-adha (bakrid)">
+      <td class="num">2027-05-17</td><td class="dim">Mon</td>
+      <td>Eid al-Adha (Bakrid)</td><td class="dim">islamic</td>
+      <td><span class="tag tag-check">confirm</span></td>
+      <td class="note">Tabular Hijri date; local moon sighting may shift it by a day.</td></tr>
+<tr data-year="2027" data-status="computed" data-name="buddha purnima (vesak)">
+      <td class="num">2027-05-20</td><td class="dim">Thu</td>
+      <td>Buddha Purnima (Vesak)</td><td class="dim">buddhist</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Shri Buddha's birth, enlightenment and parinirvana.</td></tr>
+<tr data-year="2027" data-status="computed" data-name="guru purnima">
+      <td class="num">2027-07-18</td><td class="dim">Sun</td>
+      <td>Guru Purnima</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2027" data-status="check" data-name="mawlid an-nabi (prophet muhammad's birthday)">
+      <td class="num">2027-08-15</td><td class="dim">Sun</td>
+      <td>Mawlid an-Nabi (Prophet Muhammad's Birthday)</td><td class="dim">islamic</td>
+      <td><span class="tag tag-check">confirm</span></td>
+      <td class="note">Tabular Hijri date; local moon sighting may shift it by a day.</td></tr>
+<tr data-year="2027" data-status="computed" data-name="raksha bandhan">
+      <td class="num">2027-08-17</td><td class="dim">Tue</td>
+      <td>Raksha Bandhan</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2027" data-status="computed" data-name="shri krishna janmashtami">
+      <td class="num">2027-08-24</td><td class="dim">Tue</td>
+      <td>Shri Krishna Janmashtami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Shri Krishna was born at nishita (midnight).</td></tr>
+<tr data-year="2027" data-status="computed" data-name="shri ganesha chaturthi">
+      <td class="num">2027-09-04</td><td class="dim">Sat</td>
+      <td>Shri Ganesha Chaturthi</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Determined by the madhyahna (midday) period.</td></tr>
+<tr data-year="2027" data-status="computed" data-name="navaratri">
+      <td class="num">2027-09-30</td><td class="dim">Thu</td>
+      <td>Navaratri <span class="sub">9 days from here</span></td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">All nine nights of Shri Durga.</td></tr>
+<tr data-year="2027" data-status="computed" data-name="durga ashtami">
+      <td class="num">2027-10-07</td><td class="dim">Thu</td>
+      <td>Durga Ashtami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2027" data-status="computed" data-name="maha navami">
+      <td class="num">2027-10-08</td><td class="dim">Fri</td>
+      <td>Maha Navami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2027" data-status="computed" data-name="dussehra / vijayadashami">
+      <td class="num">2027-10-09</td><td class="dim">Sat</td>
+      <td>Dussehra / Vijayadashami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Observed in the aparahna (afternoon) period.</td></tr>
+<tr data-year="2027" data-status="computed" data-name="diwali / lakshmi puja">
+      <td class="num">2027-10-29</td><td class="dim">Fri</td>
+      <td>Diwali / Lakshmi Puja</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Lakshmi Puja falls in the pradosh (evening) period of Amavasya.</td></tr>
+<tr data-year="2027" data-status="computed" data-name="govardhan puja">
+      <td class="num">2027-10-30</td><td class="dim">Sat</td>
+      <td>Govardhan Puja</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2027" data-status="computed" data-name="bhai dooj">
+      <td class="num">2027-10-31</td><td class="dim">Sun</td>
+      <td>Bhai Dooj</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2027" data-status="computed" data-name="kartika purnima / guru nanak jayanti">
+      <td class="num">2027-11-14</td><td class="dim">Sun</td>
+      <td>Kartika Purnima / Guru Nanak Jayanti</td><td class="dim">sikh</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2027" data-status="computed" data-name="datta jayanti">
+      <td class="num">2027-12-13</td><td class="dim">Mon</td>
+      <td>Datta Jayanti</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2027" data-status="computed" data-name="christmas">
+      <td class="num">2027-12-25</td><td class="dim">Sat</td>
+      <td>Christmas</td><td class="dim">christian</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2028" data-status="computed" data-name="makar sankranti">
+      <td class="num">2028-01-15</td><td class="dim">Sat</td>
+      <td>Makar Sankranti</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Sun enters Makara (Capricorn).</td></tr>
+<tr data-year="2028" data-status="computed" data-name="vasant panchami">
+      <td class="num">2028-01-31</td><td class="dim">Mon</td>
+      <td>Vasant Panchami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2028" data-status="computed" data-name="mahashivaratri">
+      <td class="num">2028-02-23</td><td class="dim">Wed</td>
+      <td>Mahashivaratri</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Observed through the nishita (midnight) period.</td></tr>
+<tr data-year="2028" data-status="check" data-name="eid al-fitr (ramzan)">
+      <td class="num">2028-02-27</td><td class="dim">Sun</td>
+      <td>Eid al-Fitr (Ramzan)</td><td class="dim">islamic</td>
+      <td><span class="tag tag-check">confirm</span></td>
+      <td class="note">Tabular Hijri date; local moon sighting may shift it by a day.</td></tr>
+<tr data-year="2028" data-status="computed" data-name="holika dahan">
+      <td class="num">2028-03-10</td><td class="dim">Fri</td>
+      <td>Holika Dahan</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Bonfire on the eve of Holi. Timing within the night is set by Bhadra, so treat the evening as approximate.</td></tr>
+<tr data-year="2028" data-status="computed" data-name="holi">
+      <td class="num">2028-03-11</td><td class="dim">Sat</td>
+      <td>Holi</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Celebrated in Sahaja Yoga though it is not a puja day.</td></tr>
+<tr data-year="2028" data-status="computed" data-name="ugadi / gudi padwa">
+      <td class="num">2028-03-26</td><td class="dim">Sun</td>
+      <td>Ugadi / Gudi Padwa</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Hindu new year.</td></tr>
+<tr data-year="2028" data-status="computed" data-name="shri rama navami">
+      <td class="num">2028-04-03</td><td class="dim">Mon</td>
+      <td>Shri Rama Navami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Shri Rama was born at madhyahna (midday).</td></tr>
+<tr data-year="2028" data-status="computed" data-name="hanuman jayanti">
+      <td class="num">2028-04-09</td><td class="dim">Sun</td>
+      <td>Hanuman Jayanti</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2028" data-status="computed" data-name="good friday">
+      <td class="num">2028-04-14</td><td class="dim">Fri</td>
+      <td>Good Friday</td><td class="dim">christian</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2028" data-status="computed" data-name="vaisakhi / mesha sankranti">
+      <td class="num">2028-04-14</td><td class="dim">Fri</td>
+      <td>Vaisakhi / Mesha Sankranti</td><td class="dim">sikh</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Sun enters Mesha (Aries).</td></tr>
+<tr data-year="2028" data-status="computed" data-name="easter sunday">
+      <td class="num">2028-04-16</td><td class="dim">Sun</td>
+      <td>Easter Sunday</td><td class="dim">christian</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2028" data-status="computed" data-name="akshaya tritiya">
+      <td class="num">2028-04-27</td><td class="dim">Thu</td>
+      <td>Akshaya Tritiya</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2028" data-status="check" data-name="eid al-adha (bakrid)">
+      <td class="num">2028-05-05</td><td class="dim">Fri</td>
+      <td>Eid al-Adha (Bakrid)</td><td class="dim">islamic</td>
+      <td><span class="tag tag-check">confirm</span></td>
+      <td class="note">Tabular Hijri date; local moon sighting may shift it by a day.</td></tr>
+<tr data-year="2028" data-status="computed" data-name="buddha purnima (vesak)">
+      <td class="num">2028-05-08</td><td class="dim">Mon</td>
+      <td>Buddha Purnima (Vesak)</td><td class="dim">buddhist</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Shri Buddha's birth, enlightenment and parinirvana.</td></tr>
+<tr data-year="2028" data-status="computed" data-name="guru purnima">
+      <td class="num">2028-07-06</td><td class="dim">Thu</td>
+      <td>Guru Purnima</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2028" data-status="check" data-name="mawlid an-nabi (prophet muhammad's birthday)">
+      <td class="num">2028-08-03</td><td class="dim">Thu</td>
+      <td>Mawlid an-Nabi (Prophet Muhammad's Birthday)</td><td class="dim">islamic</td>
+      <td><span class="tag tag-check">confirm</span></td>
+      <td class="note">Tabular Hijri date; local moon sighting may shift it by a day.</td></tr>
+<tr data-year="2028" data-status="computed" data-name="raksha bandhan">
+      <td class="num">2028-08-05</td><td class="dim">Sat</td>
+      <td>Raksha Bandhan</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2028" data-status="computed" data-name="shri krishna janmashtami">
+      <td class="num">2028-08-13</td><td class="dim">Sun</td>
+      <td>Shri Krishna Janmashtami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Shri Krishna was born at nishita (midnight).</td></tr>
+<tr data-year="2028" data-status="computed" data-name="shri ganesha chaturthi">
+      <td class="num">2028-08-23</td><td class="dim">Wed</td>
+      <td>Shri Ganesha Chaturthi</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Determined by the madhyahna (midday) period.</td></tr>
+<tr data-year="2028" data-status="computed" data-name="navaratri">
+      <td class="num">2028-09-19</td><td class="dim">Tue</td>
+      <td>Navaratri <span class="sub">8 days from here</span></td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">All nine nights of Shri Durga.</td></tr>
+<tr data-year="2028" data-status="computed" data-name="durga ashtami">
+      <td class="num">2028-09-26</td><td class="dim">Tue</td>
+      <td>Durga Ashtami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2028" data-status="computed" data-name="maha navami">
+      <td class="num">2028-09-26</td><td class="dim">Tue</td>
+      <td>Maha Navami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2028" data-status="computed" data-name="dussehra / vijayadashami">
+      <td class="num">2028-09-27</td><td class="dim">Wed</td>
+      <td>Dussehra / Vijayadashami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Observed in the aparahna (afternoon) period.</td></tr>
+<tr data-year="2028" data-status="computed" data-name="diwali / lakshmi puja">
+      <td class="num">2028-10-17</td><td class="dim">Tue</td>
+      <td>Diwali / Lakshmi Puja</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Lakshmi Puja falls in the pradosh (evening) period of Amavasya.</td></tr>
+<tr data-year="2028" data-status="computed" data-name="govardhan puja">
+      <td class="num">2028-10-18</td><td class="dim">Wed</td>
+      <td>Govardhan Puja</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2028" data-status="computed" data-name="bhai dooj">
+      <td class="num">2028-10-19</td><td class="dim">Thu</td>
+      <td>Bhai Dooj</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2028" data-status="computed" data-name="kartika purnima / guru nanak jayanti">
+      <td class="num">2028-11-02</td><td class="dim">Thu</td>
+      <td>Kartika Purnima / Guru Nanak Jayanti</td><td class="dim">sikh</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2028" data-status="computed" data-name="datta jayanti">
+      <td class="num">2028-12-01</td><td class="dim">Fri</td>
+      <td>Datta Jayanti</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2028" data-status="computed" data-name="christmas">
+      <td class="num">2028-12-25</td><td class="dim">Mon</td>
+      <td>Christmas</td><td class="dim">christian</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2029" data-status="computed" data-name="makar sankranti">
+      <td class="num">2029-01-14</td><td class="dim">Sun</td>
+      <td>Makar Sankranti</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Sun enters Makara (Capricorn).</td></tr>
+<tr data-year="2029" data-status="computed" data-name="vasant panchami">
+      <td class="num">2029-01-19</td><td class="dim">Fri</td>
+      <td>Vasant Panchami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2029" data-status="computed" data-name="mahashivaratri">
+      <td class="num">2029-02-11</td><td class="dim">Sun</td>
+      <td>Mahashivaratri</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Observed through the nishita (midnight) period.</td></tr>
+<tr data-year="2029" data-status="check" data-name="eid al-fitr (ramzan)">
+      <td class="num">2029-02-15</td><td class="dim">Thu</td>
+      <td>Eid al-Fitr (Ramzan)</td><td class="dim">islamic</td>
+      <td><span class="tag tag-check">confirm</span></td>
+      <td class="note">Tabular Hijri date; local moon sighting may shift it by a day.</td></tr>
+<tr data-year="2029" data-status="computed" data-name="holika dahan">
+      <td class="num">2029-02-28</td><td class="dim">Wed</td>
+      <td>Holika Dahan</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Bonfire on the eve of Holi. Timing within the night is set by Bhadra, so treat the evening as approximate.</td></tr>
+<tr data-year="2029" data-status="computed" data-name="holi">
+      <td class="num">2029-03-01</td><td class="dim">Thu</td>
+      <td>Holi</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Celebrated in Sahaja Yoga though it is not a puja day.</td></tr>
+<tr data-year="2029" data-status="computed" data-name="good friday">
+      <td class="num">2029-03-30</td><td class="dim">Fri</td>
+      <td>Good Friday</td><td class="dim">christian</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2029" data-status="computed" data-name="easter sunday">
+      <td class="num">2029-04-01</td><td class="dim">Sun</td>
+      <td>Easter Sunday</td><td class="dim">christian</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2029" data-status="computed" data-name="ugadi / gudi padwa">
+      <td class="num">2029-04-14</td><td class="dim">Sat</td>
+      <td>Ugadi / Gudi Padwa</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Hindu new year.</td></tr>
+<tr data-year="2029" data-status="computed" data-name="vaisakhi / mesha sankranti">
+      <td class="num">2029-04-14</td><td class="dim">Sat</td>
+      <td>Vaisakhi / Mesha Sankranti</td><td class="dim">sikh</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Sun enters Mesha (Aries).</td></tr>
+<tr data-year="2029" data-status="computed" data-name="shri rama navami">
+      <td class="num">2029-04-22</td><td class="dim">Sun</td>
+      <td>Shri Rama Navami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Shri Rama was born at madhyahna (midday).</td></tr>
+<tr data-year="2029" data-status="check" data-name="eid al-adha (bakrid)">
+      <td class="num">2029-04-24</td><td class="dim">Tue</td>
+      <td>Eid al-Adha (Bakrid)</td><td class="dim">islamic</td>
+      <td><span class="tag tag-check">confirm</span></td>
+      <td class="note">Tabular Hijri date; local moon sighting may shift it by a day.</td></tr>
+<tr data-year="2029" data-status="computed" data-name="hanuman jayanti">
+      <td class="num">2029-04-28</td><td class="dim">Sat</td>
+      <td>Hanuman Jayanti</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2029" data-status="computed" data-name="akshaya tritiya">
+      <td class="num">2029-05-16</td><td class="dim">Wed</td>
+      <td>Akshaya Tritiya</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2029" data-status="computed" data-name="buddha purnima (vesak)">
+      <td class="num">2029-05-27</td><td class="dim">Sun</td>
+      <td>Buddha Purnima (Vesak)</td><td class="dim">buddhist</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Shri Buddha's birth, enlightenment and parinirvana.</td></tr>
+<tr data-year="2029" data-status="check" data-name="mawlid an-nabi (prophet muhammad's birthday)">
+      <td class="num">2029-07-24</td><td class="dim">Tue</td>
+      <td>Mawlid an-Nabi (Prophet Muhammad's Birthday)</td><td class="dim">islamic</td>
+      <td><span class="tag tag-check">confirm</span></td>
+      <td class="note">Tabular Hijri date; local moon sighting may shift it by a day.</td></tr>
+<tr data-year="2029" data-status="computed" data-name="guru purnima">
+      <td class="num">2029-07-25</td><td class="dim">Wed</td>
+      <td>Guru Purnima</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2029" data-status="computed" data-name="raksha bandhan">
+      <td class="num">2029-08-24</td><td class="dim">Fri</td>
+      <td>Raksha Bandhan</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2029" data-status="computed" data-name="shri krishna janmashtami">
+      <td class="num">2029-08-31</td><td class="dim">Fri</td>
+      <td>Shri Krishna Janmashtami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Shri Krishna was born at nishita (midnight).</td></tr>
+<tr data-year="2029" data-status="computed" data-name="shri ganesha chaturthi">
+      <td class="num">2029-09-11</td><td class="dim">Tue</td>
+      <td>Shri Ganesha Chaturthi</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Determined by the madhyahna (midday) period.</td></tr>
+<tr data-year="2029" data-status="computed" data-name="navaratri">
+      <td class="num">2029-10-08</td><td class="dim">Mon</td>
+      <td>Navaratri <span class="sub">8 days from here</span></td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">All nine nights of Shri Durga.</td></tr>
+<tr data-year="2029" data-status="computed" data-name="durga ashtami">
+      <td class="num">2029-10-14</td><td class="dim">Sun</td>
+      <td>Durga Ashtami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2029" data-status="computed" data-name="maha navami">
+      <td class="num">2029-10-15</td><td class="dim">Mon</td>
+      <td>Maha Navami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2029" data-status="computed" data-name="dussehra / vijayadashami">
+      <td class="num">2029-10-16</td><td class="dim">Tue</td>
+      <td>Dussehra / Vijayadashami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Observed in the aparahna (afternoon) period.</td></tr>
+<tr data-year="2029" data-status="computed" data-name="diwali / lakshmi puja">
+      <td class="num">2029-11-05</td><td class="dim">Mon</td>
+      <td>Diwali / Lakshmi Puja</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Lakshmi Puja falls in the pradosh (evening) period of Amavasya.</td></tr>
+<tr data-year="2029" data-status="computed" data-name="govardhan puja">
+      <td class="num">2029-11-06</td><td class="dim">Tue</td>
+      <td>Govardhan Puja</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2029" data-status="computed" data-name="bhai dooj">
+      <td class="num">2029-11-07</td><td class="dim">Wed</td>
+      <td>Bhai Dooj</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2029" data-status="computed" data-name="kartika purnima / guru nanak jayanti">
+      <td class="num">2029-11-21</td><td class="dim">Wed</td>
+      <td>Kartika Purnima / Guru Nanak Jayanti</td><td class="dim">sikh</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2029" data-status="computed" data-name="datta jayanti">
+      <td class="num">2029-12-20</td><td class="dim">Thu</td>
+      <td>Datta Jayanti</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2029" data-status="computed" data-name="christmas">
+      <td class="num">2029-12-25</td><td class="dim">Tue</td>
+      <td>Christmas</td><td class="dim">christian</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2030" data-status="computed" data-name="makar sankranti">
+      <td class="num">2030-01-14</td><td class="dim">Mon</td>
+      <td>Makar Sankranti</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Sun enters Makara (Capricorn).</td></tr>
+<tr data-year="2030" data-status="check" data-name="eid al-fitr (ramzan)">
+      <td class="num">2030-02-05</td><td class="dim">Tue</td>
+      <td>Eid al-Fitr (Ramzan)</td><td class="dim">islamic</td>
+      <td><span class="tag tag-check">confirm</span></td>
+      <td class="note">Tabular Hijri date; local moon sighting may shift it by a day.</td></tr>
+<tr data-year="2030" data-status="computed" data-name="vasant panchami">
+      <td class="num">2030-02-07</td><td class="dim">Thu</td>
+      <td>Vasant Panchami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2030" data-status="computed" data-name="mahashivaratri">
+      <td class="num">2030-03-02</td><td class="dim">Sat</td>
+      <td>Mahashivaratri</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Observed through the nishita (midnight) period.</td></tr>
+<tr data-year="2030" data-status="computed" data-name="holika dahan">
+      <td class="num">2030-03-19</td><td class="dim">Tue</td>
+      <td>Holika Dahan</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Bonfire on the eve of Holi. Timing within the night is set by Bhadra, so treat the evening as approximate.</td></tr>
+<tr data-year="2030" data-status="computed" data-name="holi">
+      <td class="num">2030-03-20</td><td class="dim">Wed</td>
+      <td>Holi</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Celebrated in Sahaja Yoga though it is not a puja day.</td></tr>
+<tr data-year="2030" data-status="computed" data-name="ugadi / gudi padwa">
+      <td class="num">2030-04-03</td><td class="dim">Wed</td>
+      <td>Ugadi / Gudi Padwa</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Hindu new year.</td></tr>
+<tr data-year="2030" data-status="computed" data-name="shri rama navami">
+      <td class="num">2030-04-12</td><td class="dim">Fri</td>
+      <td>Shri Rama Navami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Shri Rama was born at madhyahna (midday).</td></tr>
+<tr data-year="2030" data-status="check" data-name="eid al-adha (bakrid)">
+      <td class="num">2030-04-14</td><td class="dim">Sun</td>
+      <td>Eid al-Adha (Bakrid)</td><td class="dim">islamic</td>
+      <td><span class="tag tag-check">confirm</span></td>
+      <td class="note">Tabular Hijri date; local moon sighting may shift it by a day.</td></tr>
+<tr data-year="2030" data-status="computed" data-name="vaisakhi / mesha sankranti">
+      <td class="num">2030-04-14</td><td class="dim">Sun</td>
+      <td>Vaisakhi / Mesha Sankranti</td><td class="dim">sikh</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Sun enters Mesha (Aries).</td></tr>
+<tr data-year="2030" data-status="computed" data-name="hanuman jayanti">
+      <td class="num">2030-04-18</td><td class="dim">Thu</td>
+      <td>Hanuman Jayanti</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2030" data-status="computed" data-name="good friday">
+      <td class="num">2030-04-19</td><td class="dim">Fri</td>
+      <td>Good Friday</td><td class="dim">christian</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2030" data-status="computed" data-name="easter sunday">
+      <td class="num">2030-04-21</td><td class="dim">Sun</td>
+      <td>Easter Sunday</td><td class="dim">christian</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2030" data-status="computed" data-name="akshaya tritiya">
+      <td class="num">2030-05-05</td><td class="dim">Sun</td>
+      <td>Akshaya Tritiya</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2030" data-status="computed" data-name="buddha purnima (vesak)">
+      <td class="num">2030-05-17</td><td class="dim">Fri</td>
+      <td>Buddha Purnima (Vesak)</td><td class="dim">buddhist</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Shri Buddha's birth, enlightenment and parinirvana.</td></tr>
+<tr data-year="2030" data-status="check" data-name="mawlid an-nabi (prophet muhammad's birthday)">
+      <td class="num">2030-07-13</td><td class="dim">Sat</td>
+      <td>Mawlid an-Nabi (Prophet Muhammad's Birthday)</td><td class="dim">islamic</td>
+      <td><span class="tag tag-check">confirm</span></td>
+      <td class="note">Tabular Hijri date; local moon sighting may shift it by a day.</td></tr>
+<tr data-year="2030" data-status="computed" data-name="guru purnima">
+      <td class="num">2030-07-15</td><td class="dim">Mon</td>
+      <td>Guru Purnima</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2030" data-status="computed" data-name="raksha bandhan">
+      <td class="num">2030-08-13</td><td class="dim">Tue</td>
+      <td>Raksha Bandhan</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2030" data-status="computed" data-name="shri krishna janmashtami">
+      <td class="num">2030-08-20</td><td class="dim">Tue</td>
+      <td>Shri Krishna Janmashtami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Shri Krishna was born at nishita (midnight).</td></tr>
+<tr data-year="2030" data-status="computed" data-name="shri ganesha chaturthi">
+      <td class="num">2030-09-01</td><td class="dim">Sun</td>
+      <td>Shri Ganesha Chaturthi</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Determined by the madhyahna (midday) period.</td></tr>
+<tr data-year="2030" data-status="computed" data-name="navaratri">
+      <td class="num">2030-09-28</td><td class="dim">Sat</td>
+      <td>Navaratri <span class="sub">8 days from here</span></td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">All nine nights of Shri Durga.</td></tr>
+<tr data-year="2030" data-status="computed" data-name="durga ashtami">
+      <td class="num">2030-10-04</td><td class="dim">Fri</td>
+      <td>Durga Ashtami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2030" data-status="computed" data-name="maha navami">
+      <td class="num">2030-10-05</td><td class="dim">Sat</td>
+      <td>Maha Navami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2030" data-status="computed" data-name="dussehra / vijayadashami">
+      <td class="num">2030-10-06</td><td class="dim">Sun</td>
+      <td>Dussehra / Vijayadashami</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Observed in the aparahna (afternoon) period.</td></tr>
+<tr data-year="2030" data-status="computed" data-name="diwali / lakshmi puja">
+      <td class="num">2030-10-26</td><td class="dim">Sat</td>
+      <td>Diwali / Lakshmi Puja</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note">Lakshmi Puja falls in the pradosh (evening) period of Amavasya.</td></tr>
+<tr data-year="2030" data-status="computed" data-name="govardhan puja">
+      <td class="num">2030-10-27</td><td class="dim">Sun</td>
+      <td>Govardhan Puja</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2030" data-status="computed" data-name="bhai dooj">
+      <td class="num">2030-10-28</td><td class="dim">Mon</td>
+      <td>Bhai Dooj</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2030" data-status="computed" data-name="kartika purnima / guru nanak jayanti">
+      <td class="num">2030-11-10</td><td class="dim">Sun</td>
+      <td>Kartika Purnima / Guru Nanak Jayanti</td><td class="dim">sikh</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2030" data-status="computed" data-name="datta jayanti">
+      <td class="num">2030-12-09</td><td class="dim">Mon</td>
+      <td>Datta Jayanti</td><td class="dim">hindu</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr>
+<tr data-year="2030" data-status="computed" data-name="christmas">
+      <td class="num">2030-12-25</td><td class="dim">Wed</td>
+      <td>Christmas</td><td class="dim">christian</td>
+      <td><span class="tag tag-computed">computed</span></td>
+      <td class="note"></td></tr></tbody>
+    </table></div>
+    <p class="note" id="count"></p>
+  </section>
+
+  <section>
+    <div class="section-head"><div class="eyebrow">Astronomical</div><h2>Eclipses visible from Canada</h2></div>
+    <p class="note">Only eclipses actually visible from somewhere in Canada are included. Times are local to the city named &mdash; Toronto wherever Toronto can see it.</p>
+    <div class="scroll"><table>
+      <thead><tr><th>Date</th><th>Type</th><th>Begins</th><th>Maximum</th><th>Ends</th><th>Times for</th><th>Visibility</th></tr></thead>
+      <tbody><tr data-year="2026">
+    <td class="num">2026-03-03</td>
+    <td><span class="tag tag-lunar">lunar</span> total</td>
+    <td class="num">03:44</td><td class="num strong">06:33</td><td class="num">09:23</td>
+    <td class="dim">Toronto EST</td>
+    <td class="note">Visible from Toronto and 9 other Canadian cities checked.</td></tr>
+<tr data-year="2026">
+    <td class="num">2026-08-12</td>
+    <td><span class="tag tag-solar">solar</span> partial</td>
+    <td class="num">12:55</td><td class="num strong">13:39</td><td class="num">14:23</td>
+    <td class="dim">Toronto EDT</td>
+    <td class="note">Seen from Toronto as a partial eclipse, 8% of the Sun covered.</td></tr>
+<tr data-year="2026">
+    <td class="num">2026-08-28</td>
+    <td><span class="tag tag-lunar">lunar</span> partial</td>
+    <td class="num">21:23</td><td class="num strong">00:12</td><td class="num">03:02</td>
+    <td class="dim">Toronto EDT</td>
+    <td class="note">Visible from Toronto and 9 other Canadian cities checked.</td></tr>
+<tr data-year="2027">
+    <td class="num">2027-02-20</td>
+    <td><span class="tag tag-lunar">lunar</span> penumbral</td>
+    <td class="num">16:11</td><td class="num strong">18:12</td><td class="num">20:13</td>
+    <td class="dim">Toronto EST</td>
+    <td class="note">Visible from Toronto and 7 other Canadian cities checked.</td></tr>
+<tr data-year="2027">
+    <td class="num">2027-08-02</td>
+    <td><span class="tag tag-solar">solar</span> partial</td>
+    <td class="num">05:29</td><td class="num strong">06:09</td><td class="num">06:51</td>
+    <td class="dim">St. John's GMT-2:30</td>
+    <td class="note">Not visible from Toronto. Times shown for St. John's. Also visible from St. John's.</td></tr>
+<tr data-year="2027">
+    <td class="num">2027-08-17</td>
+    <td><span class="tag tag-lunar">lunar</span> penumbral</td>
+    <td class="num">01:23</td><td class="num strong">03:13</td><td class="num">05:03</td>
+    <td class="dim">Toronto EDT</td>
+    <td class="note">Visible from Toronto and 9 other Canadian cities checked.</td></tr>
+<tr data-year="2028">
+    <td class="num">2028-01-11</td>
+    <td><span class="tag tag-lunar">lunar</span> partial</td>
+    <td class="num">21:07</td><td class="num strong">23:13</td><td class="num">01:18</td>
+    <td class="dim">Toronto EST</td>
+    <td class="note">Visible from Toronto and 9 other Canadian cities checked.</td></tr>
+<tr data-year="2028">
+    <td class="num">2028-01-26</td>
+    <td><span class="tag tag-solar">solar</span> partial</td>
+    <td class="num">09:23</td><td class="num strong">09:53</td><td class="num">10:23</td>
+    <td class="dim">Toronto EST</td>
+    <td class="note">Seen from Toronto as a partial eclipse, 1% of the Sun covered.</td></tr>
+<tr data-year="2028">
+    <td class="num">2028-12-31</td>
+    <td><span class="tag tag-lunar">lunar</span> total</td>
+    <td class="num">09:03</td><td class="num strong">11:51</td><td class="num">14:40</td>
+    <td class="dim">Toronto EST</td>
+    <td class="note">Not visible from Toronto. Visible from Vancouver, Whitehorse, Calgary, Winnipeg, Iqaluit.</td></tr>
+<tr data-year="2029">
+    <td class="num">2029-01-14</td>
+    <td><span class="tag tag-solar">solar</span> partial</td>
+    <td class="num">11:13</td><td class="num strong">12:42</td><td class="num">14:07</td>
+    <td class="dim">Toronto EST</td>
+    <td class="note">Seen from Toronto as a partial eclipse, 52% of the Sun covered.</td></tr>
+<tr data-year="2029">
+    <td class="num">2029-06-11</td>
+    <td><span class="tag tag-solar">solar</span> partial</td>
+    <td class="num">21:13</td><td class="num strong">21:53</td><td class="num">22:33</td>
+    <td class="dim">Whitehorse GMT-7</td>
+    <td class="note">Not visible from Toronto. Times shown for Whitehorse. Also visible from Whitehorse.</td></tr>
+<tr data-year="2029">
+    <td class="num">2029-06-25</td>
+    <td><span class="tag tag-lunar">lunar</span> total</td>
+    <td class="num">20:34</td><td class="num strong">23:22</td><td class="num">02:10</td>
+    <td class="dim">Toronto EDT</td>
+    <td class="note">Visible from Toronto and 8 other Canadian cities checked.</td></tr>
+<tr data-year="2029">
+    <td class="num">2029-12-20</td>
+    <td><span class="tag tag-lunar">lunar</span> total</td>
+    <td class="num">14:42</td><td class="num strong">17:41</td><td class="num">20:41</td>
+    <td class="dim">Toronto EST</td>
+    <td class="note">Visible from Toronto and 9 other Canadian cities checked.</td></tr>
+<tr data-year="2030">
+    <td class="num">2030-12-09</td>
+    <td><span class="tag tag-lunar">lunar</span> penumbral</td>
+    <td class="num">15:07</td><td class="num strong">17:27</td><td class="num">19:47</td>
+    <td class="dim">Toronto EST</td>
+    <td class="note">Visible from Toronto and 9 other Canadian cities checked.</td></tr></tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <div class="section-head"><div class="eyebrow">Moon days</div><h2>Full moon, no moon, Saptami, Navami</h2></div>
+    <div class="scroll"><table>
+      <thead><tr><th>Year</th><th>Purnima</th><th>Amavasya</th><th>Saptami</th><th>Navami</th><th>Total</th></tr></thead>
+      <tbody><tr><td class="num">2026</td><td class="num">12</td><td class="num">12</td>
+    <td class="num">24</td><td class="num">24</td><td class="num strong">72</td></tr>
+<tr><td class="num">2027</td><td class="num">11</td><td class="num">13</td>
+    <td class="num">23</td><td class="num">25</td><td class="num strong">72</td></tr>
+<tr><td class="num">2028</td><td class="num">13</td><td class="num">12</td>
+    <td class="num">25</td><td class="num">25</td><td class="num strong">75</td></tr>
+<tr><td class="num">2029</td><td class="num">12</td><td class="num">12</td>
+    <td class="num">24</td><td class="num">24</td><td class="num strong">72</td></tr>
+<tr><td class="num">2030</td><td class="num">12</td><td class="num">13</td>
+    <td class="num">23</td><td class="num">24</td><td class="num strong">72</td></tr></tbody>
+    </table></div>
+    <details>
+      <summary>Show all 2026 moon days</summary>
+      <div class="scroll"><table>
+        <thead><tr><th>Date</th><th></th><th>Day</th><th>Paksha</th></tr></thead>
+        <tbody><tr><td class="num">2026-01-03</td><td class="dim">Sat</td>
+   <td><span class="tag tag-moon-purnima">purnima</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-01-09</td><td class="dim">Fri</td>
+   <td><span class="tag tag-moon-saptami">saptami</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-01-12</td><td class="dim">Mon</td>
+   <td><span class="tag tag-moon-navami">navami</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-01-18</td><td class="dim">Sun</td>
+   <td><span class="tag tag-moon-amavasya">amavasya</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-01-25</td><td class="dim">Sun</td>
+   <td><span class="tag tag-moon-saptami">saptami</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-01-27</td><td class="dim">Tue</td>
+   <td><span class="tag tag-moon-navami">navami</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-02-01</td><td class="dim">Sun</td>
+   <td><span class="tag tag-moon-purnima">purnima</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-02-08</td><td class="dim">Sun</td>
+   <td><span class="tag tag-moon-saptami">saptami</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-02-11</td><td class="dim">Wed</td>
+   <td><span class="tag tag-moon-navami">navami</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-02-17</td><td class="dim">Tue</td>
+   <td><span class="tag tag-moon-amavasya">amavasya</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-02-24</td><td class="dim">Tue</td>
+   <td><span class="tag tag-moon-saptami">saptami</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-02-25</td><td class="dim">Wed</td>
+   <td><span class="tag tag-moon-navami">navami</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-03-03</td><td class="dim">Tue</td>
+   <td><span class="tag tag-moon-purnima">purnima</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-03-10</td><td class="dim">Tue</td>
+   <td><span class="tag tag-moon-saptami">saptami</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-03-12</td><td class="dim">Thu</td>
+   <td><span class="tag tag-moon-navami">navami</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-03-19</td><td class="dim">Thu</td>
+   <td><span class="tag tag-moon-amavasya">amavasya</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-03-25</td><td class="dim">Wed</td>
+   <td><span class="tag tag-moon-saptami">saptami</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-03-27</td><td class="dim">Fri</td>
+   <td><span class="tag tag-moon-navami">navami</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-04-02</td><td class="dim">Thu</td>
+   <td><span class="tag tag-moon-purnima">purnima</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-04-09</td><td class="dim">Thu</td>
+   <td><span class="tag tag-moon-saptami">saptami</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-04-11</td><td class="dim">Sat</td>
+   <td><span class="tag tag-moon-navami">navami</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-04-17</td><td class="dim">Fri</td>
+   <td><span class="tag tag-moon-amavasya">amavasya</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-04-23</td><td class="dim">Thu</td>
+   <td><span class="tag tag-moon-saptami">saptami</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-04-25</td><td class="dim">Sat</td>
+   <td><span class="tag tag-moon-navami">navami</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-05-01</td><td class="dim">Fri</td>
+   <td><span class="tag tag-moon-purnima">purnima</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-05-09</td><td class="dim">Sat</td>
+   <td><span class="tag tag-moon-saptami">saptami</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-05-11</td><td class="dim">Mon</td>
+   <td><span class="tag tag-moon-navami">navami</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-05-16</td><td class="dim">Sat</td>
+   <td><span class="tag tag-moon-amavasya">amavasya</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-05-24</td><td class="dim">Sun</td>
+   <td><span class="tag tag-moon-navami">navami</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-05-31</td><td class="dim">Sun</td>
+   <td><span class="tag tag-moon-purnima">purnima</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-06-07</td><td class="dim">Sun</td>
+   <td><span class="tag tag-moon-saptami">saptami</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-06-09</td><td class="dim">Tue</td>
+   <td><span class="tag tag-moon-navami">navami</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-06-15</td><td class="dim">Mon</td>
+   <td><span class="tag tag-moon-amavasya">amavasya</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-06-21</td><td class="dim">Sun</td>
+   <td><span class="tag tag-moon-saptami">saptami</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-06-23</td><td class="dim">Tue</td>
+   <td><span class="tag tag-moon-navami">navami</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-06-29</td><td class="dim">Mon</td>
+   <td><span class="tag tag-moon-purnima">purnima</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-07-07</td><td class="dim">Tue</td>
+   <td><span class="tag tag-moon-saptami">saptami</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-07-09</td><td class="dim">Thu</td>
+   <td><span class="tag tag-moon-navami">navami</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-07-14</td><td class="dim">Tue</td>
+   <td><span class="tag tag-moon-amavasya">amavasya</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-07-20</td><td class="dim">Mon</td>
+   <td><span class="tag tag-moon-saptami">saptami</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-07-22</td><td class="dim">Wed</td>
+   <td><span class="tag tag-moon-navami">navami</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-07-29</td><td class="dim">Wed</td>
+   <td><span class="tag tag-moon-purnima">purnima</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-08-05</td><td class="dim">Wed</td>
+   <td><span class="tag tag-moon-saptami">saptami</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-08-07</td><td class="dim">Fri</td>
+   <td><span class="tag tag-moon-navami">navami</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-08-12</td><td class="dim">Wed</td>
+   <td><span class="tag tag-moon-amavasya">amavasya</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-08-19</td><td class="dim">Wed</td>
+   <td><span class="tag tag-moon-saptami">saptami</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-08-21</td><td class="dim">Fri</td>
+   <td><span class="tag tag-moon-navami">navami</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-08-28</td><td class="dim">Fri</td>
+   <td><span class="tag tag-moon-purnima">purnima</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-09-03</td><td class="dim">Thu</td>
+   <td><span class="tag tag-moon-saptami">saptami</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-09-05</td><td class="dim">Sat</td>
+   <td><span class="tag tag-moon-navami">navami</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-09-11</td><td class="dim">Fri</td>
+   <td><span class="tag tag-moon-amavasya">amavasya</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-09-18</td><td class="dim">Fri</td>
+   <td><span class="tag tag-moon-saptami">saptami</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-09-20</td><td class="dim">Sun</td>
+   <td><span class="tag tag-moon-navami">navami</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-09-26</td><td class="dim">Sat</td>
+   <td><span class="tag tag-moon-purnima">purnima</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-10-03</td><td class="dim">Sat</td>
+   <td><span class="tag tag-moon-saptami">saptami</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-10-04</td><td class="dim">Sun</td>
+   <td><span class="tag tag-moon-navami">navami</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-10-10</td><td class="dim">Sat</td>
+   <td><span class="tag tag-moon-amavasya">amavasya</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-10-17</td><td class="dim">Sat</td>
+   <td><span class="tag tag-moon-saptami">saptami</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-10-20</td><td class="dim">Tue</td>
+   <td><span class="tag tag-moon-navami">navami</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-10-26</td><td class="dim">Mon</td>
+   <td><span class="tag tag-moon-purnima">purnima</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-11-01</td><td class="dim">Sun</td>
+   <td><span class="tag tag-moon-saptami">saptami</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-11-03</td><td class="dim">Tue</td>
+   <td><span class="tag tag-moon-navami">navami</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-11-09</td><td class="dim">Mon</td>
+   <td><span class="tag tag-moon-amavasya">amavasya</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-11-16</td><td class="dim">Mon</td>
+   <td><span class="tag tag-moon-saptami">saptami</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-11-18</td><td class="dim">Wed</td>
+   <td><span class="tag tag-moon-navami">navami</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-11-24</td><td class="dim">Tue</td>
+   <td><span class="tag tag-moon-purnima">purnima</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-11-30</td><td class="dim">Mon</td>
+   <td><span class="tag tag-moon-saptami">saptami</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-12-02</td><td class="dim">Wed</td>
+   <td><span class="tag tag-moon-navami">navami</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-12-08</td><td class="dim">Tue</td>
+   <td><span class="tag tag-moon-amavasya">amavasya</span></td><td class="dim">krishna paksha</td></tr>
+<tr><td class="num">2026-12-16</td><td class="dim">Wed</td>
+   <td><span class="tag tag-moon-saptami">saptami</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-12-18</td><td class="dim">Fri</td>
+   <td><span class="tag tag-moon-navami">navami</span></td><td class="dim">shukla paksha</td></tr>
+<tr><td class="num">2026-12-30</td><td class="dim">Wed</td>
+   <td><span class="tag tag-moon-saptami">saptami</span></td><td class="dim">krishna paksha</td></tr></tbody>
+      </table></div>
+    </details>
+  </section>
+
+  <section>
+    <div class="section-head"><div class="eyebrow">Method</div><h2>How these dates were worked out</h2></div>
+    <p>Tithi comes from the Moon's ecliptic longitude minus the Sun's, so no ayanamsa is involved and there is nothing to calibrate. Lunar months are named by the sign the Sun enters during them, which correctly produces the leap months <b>Adhika Jyeshtha 2026</b> and <b>Adhika Chaitra 2029</b> &mdash; festivals skip those, as tradition requires.</p>
+    <p style="margin-top:12px">Festivals are not all placed by sunrise. Each is reckoned by its traditional window: Mahashivaratri and Janmashtami at <b>nishita</b> (midnight), Ganesha Chaturthi and Ugadi at <b>madhyahna</b> (midday), Dussehra and Maha Navami at <b>aparahna</b> (afternoon), Diwali at <b>pradosh</b> (evening). Using sunrise for all of them put six festivals a day late.</p>
+  </section>
+
+  <footer>Generated from the app's own calendar engine. Every date here is stored as an ordinary editable entry &mdash; anything wrong can be corrected in the admin panel without touching code.</footer>
+</div>
+
+<script>
+  var yearFilter = 'all';
+  var flaggedOnly = false;
+  var rows = Array.prototype.slice.call(document.querySelectorAll('#festivals tbody tr'));
+  var countEl = document.getElementById('count');
+
+  function apply() {
+    var shown = 0;
+    rows.forEach(function (row) {
+      var okYear = yearFilter === 'all' || row.dataset.year === yearFilter;
+      var okFlag = !flaggedOnly || row.dataset.status === 'check';
+      var visible = okYear && okFlag;
+      row.hidden = !visible;
+      if (visible) shown++;
+    });
+    countEl.textContent = 'Showing ' + shown + ' of ' + rows.length + ' occurrences.';
+  }
+
+  document.querySelectorAll('[data-filter="year"]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      yearFilter = button.dataset.value;
+      document.querySelectorAll('[data-filter="year"]').forEach(function (other) {
+        other.setAttribute('aria-pressed', String(other === button));
+      });
+      apply();
+    });
+  });
+
+  var flaggedButton = document.getElementById('flagged');
+  flaggedButton.addEventListener('click', function () {
+    flaggedOnly = !flaggedOnly;
+    flaggedButton.setAttribute('aria-pressed', String(flaggedOnly));
+    apply();
+  });
+
+  apply();
+</script>

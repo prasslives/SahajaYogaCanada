@@ -1,0 +1,1512 @@
+[
+  {
+    "key": "makar-sankranti",
+    "name": "Makar Sankranti",
+    "tradition": "hindu",
+    "date": "2026-01-14",
+    "note": "Sun enters Makara (Capricorn).",
+    "needsVerification": false
+  },
+  {
+    "key": "vasant-panchami",
+    "name": "Vasant Panchami",
+    "tradition": "hindu",
+    "date": "2026-01-23",
+    "needsVerification": false
+  },
+  {
+    "key": "mahashivaratri",
+    "name": "Mahashivaratri",
+    "tradition": "hindu",
+    "date": "2026-02-15",
+    "note": "Observed through the nishita (midnight) period.",
+    "needsVerification": false
+  },
+  {
+    "key": "holika-dahan",
+    "name": "Holika Dahan",
+    "tradition": "hindu",
+    "date": "2026-03-03",
+    "note": "Bonfire on the eve of Holi. Timing within the night is set by Bhadra, so treat the evening as approximate.",
+    "needsVerification": false
+  },
+  {
+    "key": "holi",
+    "name": "Holi",
+    "tradition": "hindu",
+    "date": "2026-03-04",
+    "note": "Celebrated in Sahaja Yoga though it is not a puja day.",
+    "needsVerification": false
+  },
+  {
+    "key": "ugadi",
+    "name": "Ugadi / Gudi Padwa",
+    "tradition": "hindu",
+    "date": "2026-03-19",
+    "note": "Hindu new year.",
+    "needsVerification": false
+  },
+  {
+    "key": "eid-al-fitr",
+    "name": "Eid al-Fitr (Ramzan)",
+    "tradition": "islamic",
+    "date": "2026-03-20",
+    "note": "Tabular Hijri date; local moon sighting may shift it by a day.",
+    "needsVerification": true
+  },
+  {
+    "key": "rama-navami",
+    "name": "Shri Rama Navami",
+    "tradition": "hindu",
+    "date": "2026-03-26",
+    "note": "Shri Rama was born at madhyahna (midday).",
+    "needsVerification": false
+  },
+  {
+    "key": "hanuman-jayanti",
+    "name": "Hanuman Jayanti",
+    "tradition": "hindu",
+    "date": "2026-04-02",
+    "needsVerification": false
+  },
+  {
+    "key": "good-friday",
+    "name": "Good Friday",
+    "tradition": "christian",
+    "date": "2026-04-03",
+    "needsVerification": false
+  },
+  {
+    "key": "easter",
+    "name": "Easter Sunday",
+    "tradition": "christian",
+    "date": "2026-04-05",
+    "needsVerification": false
+  },
+  {
+    "key": "vaisakhi",
+    "name": "Vaisakhi / Mesha Sankranti",
+    "tradition": "sikh",
+    "date": "2026-04-14",
+    "note": "Sun enters Mesha (Aries).",
+    "needsVerification": false
+  },
+  {
+    "key": "akshaya-tritiya",
+    "name": "Akshaya Tritiya",
+    "tradition": "hindu",
+    "date": "2026-04-19",
+    "needsVerification": false
+  },
+  {
+    "key": "buddha-purnima",
+    "name": "Buddha Purnima (Vesak)",
+    "tradition": "buddhist",
+    "date": "2026-05-01",
+    "note": "Shri Buddha's birth, enlightenment and parinirvana.",
+    "needsVerification": false
+  },
+  {
+    "key": "eid-al-adha",
+    "name": "Eid al-Adha (Bakrid)",
+    "tradition": "islamic",
+    "date": "2026-05-27",
+    "note": "Tabular Hijri date; local moon sighting may shift it by a day.",
+    "needsVerification": true
+  },
+  {
+    "key": "guru-purnima",
+    "name": "Guru Purnima",
+    "tradition": "hindu",
+    "date": "2026-07-29",
+    "needsVerification": false
+  },
+  {
+    "key": "mawlid",
+    "name": "Mawlid an-Nabi (Prophet Muhammad's Birthday)",
+    "tradition": "islamic",
+    "date": "2026-08-26",
+    "note": "Tabular Hijri date; local moon sighting may shift it by a day.",
+    "needsVerification": true
+  },
+  {
+    "key": "raksha-bandhan",
+    "name": "Raksha Bandhan",
+    "tradition": "hindu",
+    "date": "2026-08-28",
+    "needsVerification": false
+  },
+  {
+    "key": "janmashtami",
+    "name": "Shri Krishna Janmashtami",
+    "tradition": "hindu",
+    "date": "2026-09-04",
+    "note": "Shri Krishna was born at nishita (midnight).",
+    "needsVerification": false
+  },
+  {
+    "key": "ganesh-chaturthi",
+    "name": "Shri Ganesha Chaturthi",
+    "tradition": "hindu",
+    "date": "2026-09-14",
+    "note": "Determined by the madhyahna (midday) period.",
+    "needsVerification": false
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2026-10-11",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 1,
+    "totalDays": 9
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2026-10-12",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 2,
+    "totalDays": 9
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2026-10-13",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 3,
+    "totalDays": 9
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2026-10-14",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 4,
+    "totalDays": 9
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2026-10-15",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 5,
+    "totalDays": 9
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2026-10-16",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 6,
+    "totalDays": 9
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2026-10-17",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 7,
+    "totalDays": 9
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2026-10-18",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 8,
+    "totalDays": 9
+  },
+  {
+    "key": "durga-ashtami",
+    "name": "Durga Ashtami",
+    "tradition": "hindu",
+    "date": "2026-10-19",
+    "needsVerification": false
+  },
+  {
+    "key": "maha-navami",
+    "name": "Maha Navami",
+    "tradition": "hindu",
+    "date": "2026-10-19",
+    "needsVerification": false
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2026-10-19",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 9,
+    "totalDays": 9
+  },
+  {
+    "key": "dussehra",
+    "name": "Dussehra / Vijayadashami",
+    "tradition": "hindu",
+    "date": "2026-10-20",
+    "note": "Observed in the aparahna (afternoon) period.",
+    "needsVerification": false
+  },
+  {
+    "key": "diwali",
+    "name": "Diwali / Lakshmi Puja",
+    "tradition": "hindu",
+    "date": "2026-11-08",
+    "note": "Lakshmi Puja falls in the pradosh (evening) period of Amavasya.",
+    "needsVerification": false
+  },
+  {
+    "key": "govardhan-puja",
+    "name": "Govardhan Puja",
+    "tradition": "hindu",
+    "date": "2026-11-10",
+    "needsVerification": false
+  },
+  {
+    "key": "bhai-dooj",
+    "name": "Bhai Dooj",
+    "tradition": "hindu",
+    "date": "2026-11-11",
+    "needsVerification": false
+  },
+  {
+    "key": "kartika-purnima",
+    "name": "Kartika Purnima / Guru Nanak Jayanti",
+    "tradition": "sikh",
+    "date": "2026-11-24",
+    "needsVerification": false
+  },
+  {
+    "key": "datta-jayanti",
+    "name": "Datta Jayanti",
+    "tradition": "hindu",
+    "date": "2026-12-23",
+    "needsVerification": false
+  },
+  {
+    "key": "christmas",
+    "name": "Christmas",
+    "tradition": "christian",
+    "date": "2026-12-25",
+    "needsVerification": false
+  },
+  {
+    "key": "makar-sankranti",
+    "name": "Makar Sankranti",
+    "tradition": "hindu",
+    "date": "2027-01-15",
+    "note": "Sun enters Makara (Capricorn).",
+    "needsVerification": false
+  },
+  {
+    "key": "vasant-panchami",
+    "name": "Vasant Panchami",
+    "tradition": "hindu",
+    "date": "2027-02-11",
+    "needsVerification": false
+  },
+  {
+    "key": "mahashivaratri",
+    "name": "Mahashivaratri",
+    "tradition": "hindu",
+    "date": "2027-03-06",
+    "note": "Observed through the nishita (midnight) period.",
+    "needsVerification": false
+  },
+  {
+    "key": "eid-al-fitr",
+    "name": "Eid al-Fitr (Ramzan)",
+    "tradition": "islamic",
+    "date": "2027-03-10",
+    "note": "Tabular Hijri date; local moon sighting may shift it by a day.",
+    "needsVerification": true
+  },
+  {
+    "key": "holika-dahan",
+    "name": "Holika Dahan",
+    "tradition": "hindu",
+    "date": "2027-03-22",
+    "note": "Bonfire on the eve of Holi. Timing within the night is set by Bhadra, so treat the evening as approximate.",
+    "needsVerification": false
+  },
+  {
+    "key": "holi",
+    "name": "Holi",
+    "tradition": "hindu",
+    "date": "2027-03-23",
+    "note": "Celebrated in Sahaja Yoga though it is not a puja day.",
+    "needsVerification": false
+  },
+  {
+    "key": "good-friday",
+    "name": "Good Friday",
+    "tradition": "christian",
+    "date": "2027-03-26",
+    "needsVerification": false
+  },
+  {
+    "key": "easter",
+    "name": "Easter Sunday",
+    "tradition": "christian",
+    "date": "2027-03-28",
+    "needsVerification": false
+  },
+  {
+    "key": "ugadi",
+    "name": "Ugadi / Gudi Padwa",
+    "tradition": "hindu",
+    "date": "2027-04-07",
+    "note": "Hindu new year.",
+    "needsVerification": false
+  },
+  {
+    "key": "vaisakhi",
+    "name": "Vaisakhi / Mesha Sankranti",
+    "tradition": "sikh",
+    "date": "2027-04-14",
+    "note": "Sun enters Mesha (Aries).",
+    "needsVerification": false
+  },
+  {
+    "key": "rama-navami",
+    "name": "Shri Rama Navami",
+    "tradition": "hindu",
+    "date": "2027-04-15",
+    "note": "Shri Rama was born at madhyahna (midday).",
+    "needsVerification": false
+  },
+  {
+    "key": "hanuman-jayanti",
+    "name": "Hanuman Jayanti",
+    "tradition": "hindu",
+    "date": "2027-04-20",
+    "needsVerification": false
+  },
+  {
+    "key": "akshaya-tritiya",
+    "name": "Akshaya Tritiya",
+    "tradition": "hindu",
+    "date": "2027-05-08",
+    "needsVerification": false
+  },
+  {
+    "key": "eid-al-adha",
+    "name": "Eid al-Adha (Bakrid)",
+    "tradition": "islamic",
+    "date": "2027-05-17",
+    "note": "Tabular Hijri date; local moon sighting may shift it by a day.",
+    "needsVerification": true
+  },
+  {
+    "key": "buddha-purnima",
+    "name": "Buddha Purnima (Vesak)",
+    "tradition": "buddhist",
+    "date": "2027-05-20",
+    "note": "Shri Buddha's birth, enlightenment and parinirvana.",
+    "needsVerification": false
+  },
+  {
+    "key": "guru-purnima",
+    "name": "Guru Purnima",
+    "tradition": "hindu",
+    "date": "2027-07-18",
+    "needsVerification": false
+  },
+  {
+    "key": "mawlid",
+    "name": "Mawlid an-Nabi (Prophet Muhammad's Birthday)",
+    "tradition": "islamic",
+    "date": "2027-08-15",
+    "note": "Tabular Hijri date; local moon sighting may shift it by a day.",
+    "needsVerification": true
+  },
+  {
+    "key": "raksha-bandhan",
+    "name": "Raksha Bandhan",
+    "tradition": "hindu",
+    "date": "2027-08-17",
+    "needsVerification": false
+  },
+  {
+    "key": "janmashtami",
+    "name": "Shri Krishna Janmashtami",
+    "tradition": "hindu",
+    "date": "2027-08-24",
+    "note": "Shri Krishna was born at nishita (midnight).",
+    "needsVerification": false
+  },
+  {
+    "key": "ganesh-chaturthi",
+    "name": "Shri Ganesha Chaturthi",
+    "tradition": "hindu",
+    "date": "2027-09-04",
+    "note": "Determined by the madhyahna (midday) period.",
+    "needsVerification": false
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2027-09-30",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 1,
+    "totalDays": 9
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2027-10-01",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 2,
+    "totalDays": 9
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2027-10-02",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 3,
+    "totalDays": 9
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2027-10-03",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 4,
+    "totalDays": 9
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2027-10-04",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 5,
+    "totalDays": 9
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2027-10-05",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 6,
+    "totalDays": 9
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2027-10-06",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 7,
+    "totalDays": 9
+  },
+  {
+    "key": "durga-ashtami",
+    "name": "Durga Ashtami",
+    "tradition": "hindu",
+    "date": "2027-10-07",
+    "needsVerification": false
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2027-10-07",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 8,
+    "totalDays": 9
+  },
+  {
+    "key": "maha-navami",
+    "name": "Maha Navami",
+    "tradition": "hindu",
+    "date": "2027-10-08",
+    "needsVerification": false
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2027-10-08",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 9,
+    "totalDays": 9
+  },
+  {
+    "key": "dussehra",
+    "name": "Dussehra / Vijayadashami",
+    "tradition": "hindu",
+    "date": "2027-10-09",
+    "note": "Observed in the aparahna (afternoon) period.",
+    "needsVerification": false
+  },
+  {
+    "key": "diwali",
+    "name": "Diwali / Lakshmi Puja",
+    "tradition": "hindu",
+    "date": "2027-10-29",
+    "note": "Lakshmi Puja falls in the pradosh (evening) period of Amavasya.",
+    "needsVerification": false
+  },
+  {
+    "key": "govardhan-puja",
+    "name": "Govardhan Puja",
+    "tradition": "hindu",
+    "date": "2027-10-30",
+    "needsVerification": false
+  },
+  {
+    "key": "bhai-dooj",
+    "name": "Bhai Dooj",
+    "tradition": "hindu",
+    "date": "2027-10-31",
+    "needsVerification": false
+  },
+  {
+    "key": "kartika-purnima",
+    "name": "Kartika Purnima / Guru Nanak Jayanti",
+    "tradition": "sikh",
+    "date": "2027-11-14",
+    "needsVerification": false
+  },
+  {
+    "key": "datta-jayanti",
+    "name": "Datta Jayanti",
+    "tradition": "hindu",
+    "date": "2027-12-13",
+    "needsVerification": false
+  },
+  {
+    "key": "christmas",
+    "name": "Christmas",
+    "tradition": "christian",
+    "date": "2027-12-25",
+    "needsVerification": false
+  },
+  {
+    "key": "makar-sankranti",
+    "name": "Makar Sankranti",
+    "tradition": "hindu",
+    "date": "2028-01-15",
+    "note": "Sun enters Makara (Capricorn).",
+    "needsVerification": false
+  },
+  {
+    "key": "vasant-panchami",
+    "name": "Vasant Panchami",
+    "tradition": "hindu",
+    "date": "2028-01-31",
+    "needsVerification": false
+  },
+  {
+    "key": "mahashivaratri",
+    "name": "Mahashivaratri",
+    "tradition": "hindu",
+    "date": "2028-02-23",
+    "note": "Observed through the nishita (midnight) period.",
+    "needsVerification": false
+  },
+  {
+    "key": "eid-al-fitr",
+    "name": "Eid al-Fitr (Ramzan)",
+    "tradition": "islamic",
+    "date": "2028-02-27",
+    "note": "Tabular Hijri date; local moon sighting may shift it by a day.",
+    "needsVerification": true
+  },
+  {
+    "key": "holika-dahan",
+    "name": "Holika Dahan",
+    "tradition": "hindu",
+    "date": "2028-03-10",
+    "note": "Bonfire on the eve of Holi. Timing within the night is set by Bhadra, so treat the evening as approximate.",
+    "needsVerification": false
+  },
+  {
+    "key": "holi",
+    "name": "Holi",
+    "tradition": "hindu",
+    "date": "2028-03-11",
+    "note": "Celebrated in Sahaja Yoga though it is not a puja day.",
+    "needsVerification": false
+  },
+  {
+    "key": "ugadi",
+    "name": "Ugadi / Gudi Padwa",
+    "tradition": "hindu",
+    "date": "2028-03-26",
+    "note": "Hindu new year.",
+    "needsVerification": false
+  },
+  {
+    "key": "rama-navami",
+    "name": "Shri Rama Navami",
+    "tradition": "hindu",
+    "date": "2028-04-03",
+    "note": "Shri Rama was born at madhyahna (midday).",
+    "needsVerification": false
+  },
+  {
+    "key": "hanuman-jayanti",
+    "name": "Hanuman Jayanti",
+    "tradition": "hindu",
+    "date": "2028-04-09",
+    "needsVerification": false
+  },
+  {
+    "key": "good-friday",
+    "name": "Good Friday",
+    "tradition": "christian",
+    "date": "2028-04-14",
+    "needsVerification": false
+  },
+  {
+    "key": "vaisakhi",
+    "name": "Vaisakhi / Mesha Sankranti",
+    "tradition": "sikh",
+    "date": "2028-04-14",
+    "note": "Sun enters Mesha (Aries).",
+    "needsVerification": false
+  },
+  {
+    "key": "easter",
+    "name": "Easter Sunday",
+    "tradition": "christian",
+    "date": "2028-04-16",
+    "needsVerification": false
+  },
+  {
+    "key": "akshaya-tritiya",
+    "name": "Akshaya Tritiya",
+    "tradition": "hindu",
+    "date": "2028-04-27",
+    "needsVerification": false
+  },
+  {
+    "key": "eid-al-adha",
+    "name": "Eid al-Adha (Bakrid)",
+    "tradition": "islamic",
+    "date": "2028-05-05",
+    "note": "Tabular Hijri date; local moon sighting may shift it by a day.",
+    "needsVerification": true
+  },
+  {
+    "key": "buddha-purnima",
+    "name": "Buddha Purnima (Vesak)",
+    "tradition": "buddhist",
+    "date": "2028-05-08",
+    "note": "Shri Buddha's birth, enlightenment and parinirvana.",
+    "needsVerification": false
+  },
+  {
+    "key": "guru-purnima",
+    "name": "Guru Purnima",
+    "tradition": "hindu",
+    "date": "2028-07-06",
+    "needsVerification": false
+  },
+  {
+    "key": "mawlid",
+    "name": "Mawlid an-Nabi (Prophet Muhammad's Birthday)",
+    "tradition": "islamic",
+    "date": "2028-08-03",
+    "note": "Tabular Hijri date; local moon sighting may shift it by a day.",
+    "needsVerification": true
+  },
+  {
+    "key": "raksha-bandhan",
+    "name": "Raksha Bandhan",
+    "tradition": "hindu",
+    "date": "2028-08-05",
+    "needsVerification": false
+  },
+  {
+    "key": "janmashtami",
+    "name": "Shri Krishna Janmashtami",
+    "tradition": "hindu",
+    "date": "2028-08-13",
+    "note": "Shri Krishna was born at nishita (midnight).",
+    "needsVerification": false
+  },
+  {
+    "key": "ganesh-chaturthi",
+    "name": "Shri Ganesha Chaturthi",
+    "tradition": "hindu",
+    "date": "2028-08-23",
+    "note": "Determined by the madhyahna (midday) period.",
+    "needsVerification": false
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2028-09-19",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 1,
+    "totalDays": 8
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2028-09-20",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 2,
+    "totalDays": 8
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2028-09-21",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 3,
+    "totalDays": 8
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2028-09-22",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 4,
+    "totalDays": 8
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2028-09-23",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 5,
+    "totalDays": 8
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2028-09-24",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 6,
+    "totalDays": 8
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2028-09-25",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 7,
+    "totalDays": 8
+  },
+  {
+    "key": "durga-ashtami",
+    "name": "Durga Ashtami",
+    "tradition": "hindu",
+    "date": "2028-09-26",
+    "needsVerification": false
+  },
+  {
+    "key": "maha-navami",
+    "name": "Maha Navami",
+    "tradition": "hindu",
+    "date": "2028-09-26",
+    "needsVerification": false
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2028-09-26",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 8,
+    "totalDays": 8
+  },
+  {
+    "key": "dussehra",
+    "name": "Dussehra / Vijayadashami",
+    "tradition": "hindu",
+    "date": "2028-09-27",
+    "note": "Observed in the aparahna (afternoon) period.",
+    "needsVerification": false
+  },
+  {
+    "key": "diwali",
+    "name": "Diwali / Lakshmi Puja",
+    "tradition": "hindu",
+    "date": "2028-10-17",
+    "note": "Lakshmi Puja falls in the pradosh (evening) period of Amavasya.",
+    "needsVerification": false
+  },
+  {
+    "key": "govardhan-puja",
+    "name": "Govardhan Puja",
+    "tradition": "hindu",
+    "date": "2028-10-18",
+    "needsVerification": false
+  },
+  {
+    "key": "bhai-dooj",
+    "name": "Bhai Dooj",
+    "tradition": "hindu",
+    "date": "2028-10-19",
+    "needsVerification": false
+  },
+  {
+    "key": "kartika-purnima",
+    "name": "Kartika Purnima / Guru Nanak Jayanti",
+    "tradition": "sikh",
+    "date": "2028-11-02",
+    "needsVerification": false
+  },
+  {
+    "key": "datta-jayanti",
+    "name": "Datta Jayanti",
+    "tradition": "hindu",
+    "date": "2028-12-01",
+    "needsVerification": false
+  },
+  {
+    "key": "christmas",
+    "name": "Christmas",
+    "tradition": "christian",
+    "date": "2028-12-25",
+    "needsVerification": false
+  },
+  {
+    "key": "makar-sankranti",
+    "name": "Makar Sankranti",
+    "tradition": "hindu",
+    "date": "2029-01-14",
+    "note": "Sun enters Makara (Capricorn).",
+    "needsVerification": false
+  },
+  {
+    "key": "vasant-panchami",
+    "name": "Vasant Panchami",
+    "tradition": "hindu",
+    "date": "2029-01-19",
+    "needsVerification": false
+  },
+  {
+    "key": "mahashivaratri",
+    "name": "Mahashivaratri",
+    "tradition": "hindu",
+    "date": "2029-02-11",
+    "note": "Observed through the nishita (midnight) period.",
+    "needsVerification": false
+  },
+  {
+    "key": "eid-al-fitr",
+    "name": "Eid al-Fitr (Ramzan)",
+    "tradition": "islamic",
+    "date": "2029-02-15",
+    "note": "Tabular Hijri date; local moon sighting may shift it by a day.",
+    "needsVerification": true
+  },
+  {
+    "key": "holika-dahan",
+    "name": "Holika Dahan",
+    "tradition": "hindu",
+    "date": "2029-02-28",
+    "note": "Bonfire on the eve of Holi. Timing within the night is set by Bhadra, so treat the evening as approximate.",
+    "needsVerification": false
+  },
+  {
+    "key": "holi",
+    "name": "Holi",
+    "tradition": "hindu",
+    "date": "2029-03-01",
+    "note": "Celebrated in Sahaja Yoga though it is not a puja day.",
+    "needsVerification": false
+  },
+  {
+    "key": "good-friday",
+    "name": "Good Friday",
+    "tradition": "christian",
+    "date": "2029-03-30",
+    "needsVerification": false
+  },
+  {
+    "key": "easter",
+    "name": "Easter Sunday",
+    "tradition": "christian",
+    "date": "2029-04-01",
+    "needsVerification": false
+  },
+  {
+    "key": "ugadi",
+    "name": "Ugadi / Gudi Padwa",
+    "tradition": "hindu",
+    "date": "2029-04-14",
+    "note": "Hindu new year.",
+    "needsVerification": false
+  },
+  {
+    "key": "vaisakhi",
+    "name": "Vaisakhi / Mesha Sankranti",
+    "tradition": "sikh",
+    "date": "2029-04-14",
+    "note": "Sun enters Mesha (Aries).",
+    "needsVerification": false
+  },
+  {
+    "key": "rama-navami",
+    "name": "Shri Rama Navami",
+    "tradition": "hindu",
+    "date": "2029-04-22",
+    "note": "Shri Rama was born at madhyahna (midday).",
+    "needsVerification": false
+  },
+  {
+    "key": "eid-al-adha",
+    "name": "Eid al-Adha (Bakrid)",
+    "tradition": "islamic",
+    "date": "2029-04-24",
+    "note": "Tabular Hijri date; local moon sighting may shift it by a day.",
+    "needsVerification": true
+  },
+  {
+    "key": "hanuman-jayanti",
+    "name": "Hanuman Jayanti",
+    "tradition": "hindu",
+    "date": "2029-04-28",
+    "needsVerification": false
+  },
+  {
+    "key": "akshaya-tritiya",
+    "name": "Akshaya Tritiya",
+    "tradition": "hindu",
+    "date": "2029-05-16",
+    "needsVerification": false
+  },
+  {
+    "key": "buddha-purnima",
+    "name": "Buddha Purnima (Vesak)",
+    "tradition": "buddhist",
+    "date": "2029-05-27",
+    "note": "Shri Buddha's birth, enlightenment and parinirvana.",
+    "needsVerification": false
+  },
+  {
+    "key": "mawlid",
+    "name": "Mawlid an-Nabi (Prophet Muhammad's Birthday)",
+    "tradition": "islamic",
+    "date": "2029-07-24",
+    "note": "Tabular Hijri date; local moon sighting may shift it by a day.",
+    "needsVerification": true
+  },
+  {
+    "key": "guru-purnima",
+    "name": "Guru Purnima",
+    "tradition": "hindu",
+    "date": "2029-07-25",
+    "needsVerification": false
+  },
+  {
+    "key": "raksha-bandhan",
+    "name": "Raksha Bandhan",
+    "tradition": "hindu",
+    "date": "2029-08-24",
+    "needsVerification": false
+  },
+  {
+    "key": "janmashtami",
+    "name": "Shri Krishna Janmashtami",
+    "tradition": "hindu",
+    "date": "2029-08-31",
+    "note": "Shri Krishna was born at nishita (midnight).",
+    "needsVerification": false
+  },
+  {
+    "key": "ganesh-chaturthi",
+    "name": "Shri Ganesha Chaturthi",
+    "tradition": "hindu",
+    "date": "2029-09-11",
+    "note": "Determined by the madhyahna (midday) period.",
+    "needsVerification": false
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2029-10-08",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 1,
+    "totalDays": 8
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2029-10-09",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 2,
+    "totalDays": 8
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2029-10-10",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 3,
+    "totalDays": 8
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2029-10-11",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 4,
+    "totalDays": 8
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2029-10-12",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 5,
+    "totalDays": 8
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2029-10-13",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 6,
+    "totalDays": 8
+  },
+  {
+    "key": "durga-ashtami",
+    "name": "Durga Ashtami",
+    "tradition": "hindu",
+    "date": "2029-10-14",
+    "needsVerification": false
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2029-10-14",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 7,
+    "totalDays": 8
+  },
+  {
+    "key": "maha-navami",
+    "name": "Maha Navami",
+    "tradition": "hindu",
+    "date": "2029-10-15",
+    "needsVerification": false
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2029-10-15",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 8,
+    "totalDays": 8
+  },
+  {
+    "key": "dussehra",
+    "name": "Dussehra / Vijayadashami",
+    "tradition": "hindu",
+    "date": "2029-10-16",
+    "note": "Observed in the aparahna (afternoon) period.",
+    "needsVerification": false
+  },
+  {
+    "key": "diwali",
+    "name": "Diwali / Lakshmi Puja",
+    "tradition": "hindu",
+    "date": "2029-11-05",
+    "note": "Lakshmi Puja falls in the pradosh (evening) period of Amavasya.",
+    "needsVerification": false
+  },
+  {
+    "key": "govardhan-puja",
+    "name": "Govardhan Puja",
+    "tradition": "hindu",
+    "date": "2029-11-06",
+    "needsVerification": false
+  },
+  {
+    "key": "bhai-dooj",
+    "name": "Bhai Dooj",
+    "tradition": "hindu",
+    "date": "2029-11-07",
+    "needsVerification": false
+  },
+  {
+    "key": "kartika-purnima",
+    "name": "Kartika Purnima / Guru Nanak Jayanti",
+    "tradition": "sikh",
+    "date": "2029-11-21",
+    "needsVerification": false
+  },
+  {
+    "key": "datta-jayanti",
+    "name": "Datta Jayanti",
+    "tradition": "hindu",
+    "date": "2029-12-20",
+    "needsVerification": false
+  },
+  {
+    "key": "christmas",
+    "name": "Christmas",
+    "tradition": "christian",
+    "date": "2029-12-25",
+    "needsVerification": false
+  },
+  {
+    "key": "makar-sankranti",
+    "name": "Makar Sankranti",
+    "tradition": "hindu",
+    "date": "2030-01-14",
+    "note": "Sun enters Makara (Capricorn).",
+    "needsVerification": false
+  },
+  {
+    "key": "eid-al-fitr",
+    "name": "Eid al-Fitr (Ramzan)",
+    "tradition": "islamic",
+    "date": "2030-02-05",
+    "note": "Tabular Hijri date; local moon sighting may shift it by a day.",
+    "needsVerification": true
+  },
+  {
+    "key": "vasant-panchami",
+    "name": "Vasant Panchami",
+    "tradition": "hindu",
+    "date": "2030-02-07",
+    "needsVerification": false
+  },
+  {
+    "key": "mahashivaratri",
+    "name": "Mahashivaratri",
+    "tradition": "hindu",
+    "date": "2030-03-02",
+    "note": "Observed through the nishita (midnight) period.",
+    "needsVerification": false
+  },
+  {
+    "key": "holika-dahan",
+    "name": "Holika Dahan",
+    "tradition": "hindu",
+    "date": "2030-03-19",
+    "note": "Bonfire on the eve of Holi. Timing within the night is set by Bhadra, so treat the evening as approximate.",
+    "needsVerification": false
+  },
+  {
+    "key": "holi",
+    "name": "Holi",
+    "tradition": "hindu",
+    "date": "2030-03-20",
+    "note": "Celebrated in Sahaja Yoga though it is not a puja day.",
+    "needsVerification": false
+  },
+  {
+    "key": "ugadi",
+    "name": "Ugadi / Gudi Padwa",
+    "tradition": "hindu",
+    "date": "2030-04-03",
+    "note": "Hindu new year.",
+    "needsVerification": false
+  },
+  {
+    "key": "rama-navami",
+    "name": "Shri Rama Navami",
+    "tradition": "hindu",
+    "date": "2030-04-12",
+    "note": "Shri Rama was born at madhyahna (midday).",
+    "needsVerification": false
+  },
+  {
+    "key": "eid-al-adha",
+    "name": "Eid al-Adha (Bakrid)",
+    "tradition": "islamic",
+    "date": "2030-04-14",
+    "note": "Tabular Hijri date; local moon sighting may shift it by a day.",
+    "needsVerification": true
+  },
+  {
+    "key": "vaisakhi",
+    "name": "Vaisakhi / Mesha Sankranti",
+    "tradition": "sikh",
+    "date": "2030-04-14",
+    "note": "Sun enters Mesha (Aries).",
+    "needsVerification": false
+  },
+  {
+    "key": "hanuman-jayanti",
+    "name": "Hanuman Jayanti",
+    "tradition": "hindu",
+    "date": "2030-04-18",
+    "needsVerification": false
+  },
+  {
+    "key": "good-friday",
+    "name": "Good Friday",
+    "tradition": "christian",
+    "date": "2030-04-19",
+    "needsVerification": false
+  },
+  {
+    "key": "easter",
+    "name": "Easter Sunday",
+    "tradition": "christian",
+    "date": "2030-04-21",
+    "needsVerification": false
+  },
+  {
+    "key": "akshaya-tritiya",
+    "name": "Akshaya Tritiya",
+    "tradition": "hindu",
+    "date": "2030-05-05",
+    "needsVerification": false
+  },
+  {
+    "key": "buddha-purnima",
+    "name": "Buddha Purnima (Vesak)",
+    "tradition": "buddhist",
+    "date": "2030-05-17",
+    "note": "Shri Buddha's birth, enlightenment and parinirvana.",
+    "needsVerification": false
+  },
+  {
+    "key": "mawlid",
+    "name": "Mawlid an-Nabi (Prophet Muhammad's Birthday)",
+    "tradition": "islamic",
+    "date": "2030-07-13",
+    "note": "Tabular Hijri date; local moon sighting may shift it by a day.",
+    "needsVerification": true
+  },
+  {
+    "key": "guru-purnima",
+    "name": "Guru Purnima",
+    "tradition": "hindu",
+    "date": "2030-07-15",
+    "needsVerification": false
+  },
+  {
+    "key": "raksha-bandhan",
+    "name": "Raksha Bandhan",
+    "tradition": "hindu",
+    "date": "2030-08-13",
+    "needsVerification": false
+  },
+  {
+    "key": "janmashtami",
+    "name": "Shri Krishna Janmashtami",
+    "tradition": "hindu",
+    "date": "2030-08-20",
+    "note": "Shri Krishna was born at nishita (midnight).",
+    "needsVerification": false
+  },
+  {
+    "key": "ganesh-chaturthi",
+    "name": "Shri Ganesha Chaturthi",
+    "tradition": "hindu",
+    "date": "2030-09-01",
+    "note": "Determined by the madhyahna (midday) period.",
+    "needsVerification": false
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2030-09-28",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 1,
+    "totalDays": 8
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2030-09-29",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 2,
+    "totalDays": 8
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2030-09-30",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 3,
+    "totalDays": 8
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2030-10-01",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 4,
+    "totalDays": 8
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2030-10-02",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 5,
+    "totalDays": 8
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2030-10-03",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 6,
+    "totalDays": 8
+  },
+  {
+    "key": "durga-ashtami",
+    "name": "Durga Ashtami",
+    "tradition": "hindu",
+    "date": "2030-10-04",
+    "needsVerification": false
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2030-10-04",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 7,
+    "totalDays": 8
+  },
+  {
+    "key": "maha-navami",
+    "name": "Maha Navami",
+    "tradition": "hindu",
+    "date": "2030-10-05",
+    "needsVerification": false
+  },
+  {
+    "key": "navaratri",
+    "name": "Navaratri",
+    "tradition": "hindu",
+    "date": "2030-10-05",
+    "note": "All nine nights of Shri Durga.",
+    "needsVerification": false,
+    "dayNumber": 8,
+    "totalDays": 8
+  },
+  {
+    "key": "dussehra",
+    "name": "Dussehra / Vijayadashami",
+    "tradition": "hindu",
+    "date": "2030-10-06",
+    "note": "Observed in the aparahna (afternoon) period.",
+    "needsVerification": false
+  },
+  {
+    "key": "diwali",
+    "name": "Diwali / Lakshmi Puja",
+    "tradition": "hindu",
+    "date": "2030-10-26",
+    "note": "Lakshmi Puja falls in the pradosh (evening) period of Amavasya.",
+    "needsVerification": false
+  },
+  {
+    "key": "govardhan-puja",
+    "name": "Govardhan Puja",
+    "tradition": "hindu",
+    "date": "2030-10-27",
+    "needsVerification": false
+  },
+  {
+    "key": "bhai-dooj",
+    "name": "Bhai Dooj",
+    "tradition": "hindu",
+    "date": "2030-10-28",
+    "needsVerification": false
+  },
+  {
+    "key": "kartika-purnima",
+    "name": "Kartika Purnima / Guru Nanak Jayanti",
+    "tradition": "sikh",
+    "date": "2030-11-10",
+    "needsVerification": false
+  },
+  {
+    "key": "datta-jayanti",
+    "name": "Datta Jayanti",
+    "tradition": "hindu",
+    "date": "2030-12-09",
+    "needsVerification": false
+  },
+  {
+    "key": "christmas",
+    "name": "Christmas",
+    "tradition": "christian",
+    "date": "2030-12-25",
+    "needsVerification": false
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "key": "sankranti-puja",
+    "name": "Sankranti Puja",
+    "date": "2026-01-14",
+    "note": "Opens the puja year. Placed on Makar Sankranti itself.",
+    "needsConfirmation": true
+  },
+  {
+    "key": "christmas-puja",
+    "name": "Christmas Puja",
+    "date": "2026-12-25",
+    "note": "Closes the puja year, celebrated on Christmas Day.",
+    "needsConfirmation": false
+  },
+  {
+    "key": "sankranti-puja",
+    "name": "Sankranti Puja",
+    "date": "2027-01-15",
+    "note": "Opens the puja year. Placed on Makar Sankranti itself.",
+    "needsConfirmation": true
+  },
+  {
+    "key": "christmas-puja",
+    "name": "Christmas Puja",
+    "date": "2027-12-25",
+    "note": "Closes the puja year, celebrated on Christmas Day.",
+    "needsConfirmation": false
+  },
+  {
+    "key": "sankranti-puja",
+    "name": "Sankranti Puja",
+    "date": "2028-01-15",
+    "note": "Opens the puja year. Placed on Makar Sankranti itself.",
+    "needsConfirmation": true
+  },
+  {
+    "key": "christmas-puja",
+    "name": "Christmas Puja",
+    "date": "2028-12-25",
+    "note": "Closes the puja year, celebrated on Christmas Day.",
+    "needsConfirmation": false
+  },
+  {
+    "key": "sankranti-puja",
+    "name": "Sankranti Puja",
+    "date": "2029-01-14",
+    "note": "Opens the puja year. Placed on Makar Sankranti itself.",
+    "needsConfirmation": true
+  },
+  {
+    "key": "christmas-puja",
+    "name": "Christmas Puja",
+    "date": "2029-12-25",
+    "note": "Closes the puja year, celebrated on Christmas Day.",
+    "needsConfirmation": false
+  },
+  {
+    "key": "sankranti-puja",
+    "name": "Sankranti Puja",
+    "date": "2030-01-14",
+    "note": "Opens the puja year. Placed on Makar Sankranti itself.",
+    "needsConfirmation": true
+  },
+  {
+    "key": "christmas-puja",
+    "name": "Christmas Puja",
+    "date": "2030-12-25",
+    "note": "Closes the puja year, celebrated on Christmas Day.",
+    "needsConfirmation": false
+  }
+]
